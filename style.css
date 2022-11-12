@@ -70,7 +70,7 @@
   /* Container for image text */
   .caption-container {
     text-align: center;
-    background-color: #222;
+    background-color: rgb(255, 255, 255);
     padding: 2px 16px;
     color: white;
   }
@@ -95,5 +95,4 @@
   .active,
   .demo:hover {
     opacity: 1;
-  }
-  
+  } 
