@@ -110,13 +110,12 @@ const autorun4 =()=> {
 
 const scroller = document.createElement("div") 
 scroller.className="myScroll"
-scroller.innerHTML = `
-<button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-<button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>`;
-
  function renderHorizontalSection(movies) {
   const homeMidContainer = document.createElement("div");
   homeMidContainer.className = "homeMidContainer";
+  homeMidContainer.innerHTML= `
+  <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>`;
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.className = "movie";
