@@ -78,4 +78,60 @@ const renderMovie = (movie) => {
     </div>`;
 };
 
-document.addEventListener("DOMContentLoaded", autorun);
+ 
+const autorun2 = async () =>{
+  let url = undefined
+  const urlArr = ["movie/top_rated","movie/popular","movie/upcoming"]
+  for(let i=0;i<3;i++){
+    url = constructUrl(urlArr[i]);
+    fetch(url)
+    .then((res) =>res.json())
+    .then((api)=> renderHorizontalSection(api.results))
+  }
+}
+
+const autorun3 =()=> {
+  const url = `${constructUrl("genre/movie/list")}&language=en-US`;
+  fetch(url)
+  .then((res) =>res.json())
+  .then((api)=> console.log(api.genres))
+}
+
+const autorun4 =()=> {
+  const url = `${constructUrl("person/popular")}&language=en-US&page=1`;
+  fetch(url)
+  .then((res) =>res.json())
+  .then((api)=> api.results.map((actors)=>console.log(actors.name)))
+}
+
+
+const renderHorizontalSection= (movies)=>{
+  const homeMidContainer = document.createElement("div");
+  homeMidContainer.className="homeMidContainer"
+  movies.map((movie) => {
+    const movieDiv = document.createElement("div");
+    movieDiv.className="movie"
+
+    movieDiv.innerHTML = `
+        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster">
+        <h3>Rat${movie.title}</h3>`;
+    movieDiv.addEventListener("click", () => {
+      movieDetails(movie);
+    });
+    homeMidContainer.appendChild(movieDiv)
+  });
+  CONTAINER.appendChild(homeMidContainer)
+}
+
+
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  autorun()
+  autorun2()
+  autorun3()
+  autorun4()
+});
+
+
+
+
