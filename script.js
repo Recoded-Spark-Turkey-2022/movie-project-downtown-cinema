@@ -110,21 +110,25 @@ const autorun4 =()=> {
 
 const scroller = document.createElement("div") 
 scroller.className="myScroll"
- const renderHorizontalSection= (movies)=>{
- const homeMidContainer = document.createElement("div");
- homeMidContainer.className="homeMidContainer"
- movies.map((movie) => {
- const movieDiv = document.createElement("div");
- movieDiv.className="movie"
- movieDiv.innerHTML = `
+scroller.innerHTML = `
+<button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+<button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>`;
+
+ function renderHorizontalSection(movies) {
+  const homeMidContainer = document.createElement("div");
+  homeMidContainer.className = "homeMidContainer";
+  movies.map((movie) => {
+    const movieDiv = document.createElement("div");
+    movieDiv.className = "movie";
+    movieDiv.innerHTML = `
  <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster">
- <h3>Rat${movie.title}</h3>`; 
- movieDiv.addEventListener("click", () => {
- movieDetails (movie);
- });
- homeMidContainer.appendChild(movieDiv)
- });
- scroller.appendChild(homeMidContainer)
+ <h3>Rat${movie.title}</h3>`;
+    movieDiv.addEventListener("click", () => {
+      movieDetails(movie);
+    });
+    homeMidContainer.appendChild(movieDiv);
+  });
+  scroller.appendChild(homeMidContainer);
 }
  CONTAINER.appendChild(scroller)
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -133,7 +137,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   autorun3()
   autorun4()
 });
-
-
 
 
