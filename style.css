@@ -10,6 +10,12 @@
     margin: 24px 16px 0 0;
 }
 
+
+.homeMidContainer{
+    display: flex;
+    max-width: 0.2em
+}
+
 * {
     box-sizing: border-box;
   }
@@ -97,3 +103,4 @@
     opacity: 1;
   }
   
+
