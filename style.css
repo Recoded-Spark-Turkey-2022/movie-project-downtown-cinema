@@ -1,16 +1,26 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 #movie-backdrop {
-    width: 100%;
+  width: 100%;
 }
 
 .container {
-    padding-top: 32px;
+  padding-top: 32px;
 }
 
 #actors {
-    margin: 24px 16px 0 0;
+  margin: 24px 16px 0 0;
 }
-
-.homeMidContainer{
-    display: flex;
-    max-width: 0.2em
+.carouselContinar {
+  width: 70%;
+  margin: auto;
+  overflow: hidden;
+}
+.carouselSlide {
+  display: flex;
+  height: 100%;
 }
