@@ -22,6 +22,7 @@
   /* Hide the images by default */
   .mySlides {
     display: none;
+    
   }
   
   /* Add a pointer when hovering over the thumbnail images */
@@ -87,7 +88,7 @@
     width: 16.66%;
   }
   
-  /* Add a transparency effect for thumnbail images */
+  
   .demo {
     opacity: 0.6;
   }
@@ -96,3 +97,16 @@
   .demo:hover {
     opacity: 1;
   } 
+
+  .scrolling_row{
+    display:flex;
+    align-items: row;
+    align-items: flex-start;
+    
+  }
+  .Terrifier{
+    margin-right: 2px;
+  }
+  .Black_Adam{
+    margin-left: 2px;
+  }
