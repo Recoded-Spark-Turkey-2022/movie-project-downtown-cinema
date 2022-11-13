@@ -105,26 +105,28 @@ const autorun4 =()=> {
 }
 
 
-const renderHorizontalSection= (movies)=>{
-  const homeMidContainer = document.createElement("div");
-  homeMidContainer.className="homeMidContainer"
-  movies.map((movie) => {
-    const movieDiv = document.createElement("div");
-    movieDiv.className="movie"
 
-    movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster">
-        <h3>Rat${movie.title}</h3>`;
-    movieDiv.addEventListener("click", () => {
-      movieDetails(movie);
-    });
-    homeMidContainer.appendChild(movieDiv)
-  });
-  CONTAINER.appendChild(homeMidContainer)
+
+
+const scroller = document.createElement("div") 
+scroller.className="myScroll"
+ const renderHorizontalSection= (movies)=>{
+ const homeMidContainer = document.createElement("div");
+ homeMidContainer.className="homeMidContainer"
+ movies.map((movie) => {
+ const movieDiv = document.createElement("div");
+ movieDiv.className="movie"
+ movieDiv.innerHTML = `
+ <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster">
+ <h3>Rat${movie.title}</h3>`; 
+ movieDiv.addEventListener("click", () => {
+ movieDetails (movie);
+ });
+ homeMidContainer.appendChild(movieDiv)
+ });
+ scroller.appendChild(homeMidContainer)
 }
-
-
-
+ CONTAINER.appendChild(scroller)
 document.addEventListener("DOMContentLoaded", ()=>{
   autorun()
   autorun2()
