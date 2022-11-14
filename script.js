@@ -44,7 +44,7 @@ const renderMovies = (movies) => {
   carouselContinar.className = "carouselContinar";
   const carouselSlide = document.createElement("div");
   carouselSlide.className = "carouselSlide";
-
+  let x = 0;
   movies.map((movie, i) => {
     const movieDiv = document.createElement("img");
 
@@ -53,6 +53,7 @@ const renderMovies = (movies) => {
 
     movieDiv.setAttribute("class", "slideImag");
     movieDiv.setAttribute("id", `image${i + 1}`);
+    x++;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
@@ -67,25 +68,25 @@ const renderMovies = (movies) => {
   btnPrev.id = "btnPrev";
   const btnNext = document.createElement("button");
   btnNext.id = "btnNext";
-  btnPrev.innerText = "previous";
-  btnNext.innerText = "Next";
-  CONTAINER.appendChild(btnPrev);
-  CONTAINER.appendChild(btnNext);
+  btnPrev.innerHTML = `&lt;`;
+  btnNext.innerHTML = `&gt;`;
+  carouselContinar.appendChild(btnPrev);
+  carouselContinar.appendChild(btnNext);
 
   const carouselImage = document.querySelectorAll(".carouselSlide img");
 
   let counter = 0;
   const size = carouselImage[0].clientWidth;
 
-  console.log(size);
-
   btnNext.addEventListener("click", () => {
+    if (counter >= x - 1) return;
     carouselSlide.style.transition = "transform 0.4s ease-in-out";
     counter++;
     carouselSlide.style.transform = "translateX(" + -size * counter + "px)";
   });
 
   btnPrev.addEventListener("click", () => {
+    if (counter <= 0) return;
     carouselSlide.style.transition = "transform 0.4s ease-in-out";
     counter--;
     carouselSlide.style.transform = "translateX(" + -size * counter + "px)";
