@@ -104,7 +104,8 @@ const autorun4 =()=> {
   .then((api)=> api.results.map((actors)=>console.log(actors.name)))
 }
 
-
+const scroller = document.createElement("div")
+scroller.className="myScroll"
 const renderHorizontalSection= (movies)=>{
   const homeMidContainer = document.createElement("div");
   homeMidContainer.className="homeMidContainer"
@@ -120,9 +121,9 @@ const renderHorizontalSection= (movies)=>{
     });
     homeMidContainer.appendChild(movieDiv)
   });
-  CONTAINER.appendChild(homeMidContainer)
+  scroller.appendChild(homeMidContainer)
 }
-
+CONTAINER.appendChild(scroller)
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
