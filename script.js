@@ -42,11 +42,22 @@ const fetchMovie = async (movieId) => {
 const renderMovies = (movies) => {
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
-    movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster">
-        <h3>${movie.title}</h3>`;
+    movieDiv.innerHTML =` 
+    <div class="card">
+      <a href="#">
+        <img class="img1" src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${movie.title} poster">
+  
+        <div class="title">${movie.title}</div>
+        <div class="text">${movie.overview}</div>
+        <a href="#"><div class="catagory">${checkGenre(movie.genre_ids)} <i class="fas fa-film"></i></div></a>
+        <a href="#"><div class="views">${movie.vote_average} <i class="far fa-eye"></i> </div></a>
+      </a>
+    </div>`;
+    // movieDiv.innerHTML = `
+    //     <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
+    //   movie.title
+    // } poster">
+    //     <h3>${movie.title}</h3>`;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
