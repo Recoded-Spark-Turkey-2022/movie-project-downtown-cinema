@@ -90,12 +90,21 @@ const autorun2 = async () =>{
   }
 }
 
+let genreIds = []
 const autorun3 =()=> {
   const url = `${constructUrl("genre/movie/list")}&language=en-US`;
   fetch(url)
   .then((res) =>res.json())
-  .then((api)=> console.log(api.genres))
+  .then((api)=> api.genres.forEach(element =>{ genreIds.push(element)}))
 }
+
+function checkGenre (genreIdCalled){
+  for(let i = 0; genreIds.length; i++ ){
+    if(genreIdCalled[0]===genreIds[i].id) 
+    return genreIds[i].name
+  }
+}
+
 
 const autorun4 =()=> {
   const url = `${constructUrl("person/popular")}&language=en-US&page=1`;
@@ -127,9 +136,9 @@ CONTAINER.appendChild(scroller)
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
+  autorun3()
   autorun()
   autorun2()
-  autorun3()
   autorun4()
 });
 
