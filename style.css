@@ -55,3 +55,31 @@
   text-align: center;
   opacity: 0.9;
 }
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: azure;
+}
+.footer li {
+  display: inline;
+}
+.github {
+  align-self: flex-end;
+  margin-right: 20px;
+}
+.githubtext {
+  color: rgb(245, 131, 74);
+}
+.githubtext:hover {
+  text-decoration: none;
+  color: rgb(245, 131, 74);
+}
+.text-center {
+  font-size: large;
+  font-style: italic;
+  font-weight: 600;
+}
+.soicalMedia {
+  transform: translateX(50%);
+}
