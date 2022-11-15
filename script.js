@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
@@ -39,18 +39,59 @@ const fetchMovie = async (movieId) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovies2 = (movies) => {
-  movies.map((movie) => {
-    const movieDiv = document.createElement("div");
-    movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster">
-        <h3>${movie.title}</h3>`;
+
+const renderMovies = (movies) => {
+  const carouselContinar = document.querySelector(".carouselContinar");
+  const upperSection = document.querySelector(".upperSection");
+  const carouselSlide = document.createElement("div");
+  carouselSlide.className = "carouselSlide";
+  let x = 0;
+  movies.map((movie, i) => {
+    const movieDiv = document.createElement("img");
+
+    movieDiv.setAttribute("src", `${BACKDROP_BASE_URL + movie.backdrop_path}`);
+    movieDiv.setAttribute("alt", `${movie.title} poster">`);
+
+    movieDiv.setAttribute("class", "slideImag");
+    movieDiv.setAttribute("id", `image${i + 1}`);
+    x++;
+
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
-    CONTAINER.appendChild(movieDiv);
+
+    carouselSlide.appendChild(movieDiv);
+  });
+
+  carouselContinar.appendChild(carouselSlide);
+  upperSection.appendChild(carouselContinar);
+
+  const btnPrev = document.createElement("button");
+  btnPrev.id = "btnPrev";
+  const btnNext = document.createElement("button");
+  btnNext.id = "btnNext";
+  btnPrev.innerHTML = `&lt;`;
+  btnNext.innerHTML = `&gt;`;
+  carouselContinar.appendChild(btnPrev);
+  carouselContinar.appendChild(btnNext);
+
+  const carouselImage = document.querySelectorAll(".carouselSlide img");
+
+  let counter = 0;
+  const size = carouselImage[0].clientWidth;
+
+  btnNext.addEventListener("click", () => {
+    if (counter >= x - 1) return;
+    carouselSlide.style.transition = "transform 0.4s ease-in-out";
+    counter++;
+    carouselSlide.style.transform = "translateX(" + -size * counter + "px)";
+  });
+
+  btnPrev.addEventListener("click", () => {
+    if (counter <= 0) return;
+    carouselSlide.style.transition = "transform 0.4s ease-in-out";
+    counter--;
+    carouselSlide.style.transform = "translateX(" + -size * counter + "px)";
   });
 };
 
@@ -78,7 +119,6 @@ const renderMovie = (movie) => {
     </div>`;
 };
 
- 
 const autorun2 = async () =>{
   let url = undefined
   const urlArr = ["movie/top_rated","movie/popular","movie/upcoming"]
@@ -119,6 +159,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   autorun3()
   autorun4()
 });
+
 
 
 
