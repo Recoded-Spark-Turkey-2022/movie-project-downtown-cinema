@@ -39,7 +39,7 @@ const fetchMovie = async (movieId) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovies = (movies) => {
+const renderMovies2 = (movies) => {
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
@@ -103,26 +103,6 @@ const autorun4 =()=> {
   .then((res) =>res.json())
   .then((api)=> api.results.map((actors)=>console.log(actors.name)))
 }
-
-
-const renderHorizontalSection= (movies)=>{
-  const homeMidContainer = document.createElement("div");
-  homeMidContainer.className="homeMidContainer"
-  movies.map((movie) => {
-    const movieDiv = document.createElement("div");
-    movieDiv.className="movie"
-
-    movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster">
-        <h3>Rat${movie.title}</h3>`;
-    movieDiv.addEventListener("click", () => {
-      movieDetails(movie);
-    });
-    homeMidContainer.appendChild(movieDiv)
-  });
-  CONTAINER.appendChild(homeMidContainer)
-}
-
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
