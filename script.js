@@ -162,6 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // autorun2()
   // autorun4()
   movieBranch();
+  renderMoviesSortable(28)
 });
 
 async function movieBranch() {
