@@ -39,6 +39,7 @@ const fetchMovie = async (movieId) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
+
 const renderMovies = (movies) => {
   const carouselContinar = document.querySelector(".carouselContinar");
   const upperSection = document.querySelector(".upperSection");
@@ -54,6 +55,7 @@ const renderMovies = (movies) => {
     movieDiv.setAttribute("class", "slideImag");
     movieDiv.setAttribute("id", `image${i + 1}`);
     x++;
+
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
@@ -117,4 +119,48 @@ const renderMovie = (movie) => {
     </div>`;
 };
 
-document.addEventListener("DOMContentLoaded", autorun);
+const autorun2 = async () =>{
+  let url = undefined
+  const urlArr = ["movie/top_rated","movie/popular","movie/upcoming"]
+  for(let i=0;i<3;i++){
+    url = constructUrl(urlArr[i]);
+    fetch(url)
+    .then((res) =>res.json())
+    .then((api)=> renderHorizontalSection(api.results))
+  }
+}
+
+let genreIds = []
+const autorun3 =()=> {
+  const url = `${constructUrl("genre/movie/list")}&language=en-US`;
+  fetch(url)
+  .then((res) =>res.json())
+  .then((api)=> api.genres.forEach(element => {genreIds.push(element)} ))
+}
+
+function checkGenre (genreIdCalled){
+  for(let i = 0; genreIds.length; i++ ){
+    if(genreIdCalled[0]===genreIds[i].id) 
+    return genreIds[i].name
+  }
+}
+
+const autorun4 =()=> {
+  const url = `${constructUrl("person/popular")}&language=en-US&page=1`;
+  fetch(url)
+  .then((res) =>res.json())
+  .then((api)=> api.results.map((actors)=>console.log(actors.name)))
+}
+
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  autorun()
+  autorun2()
+  autorun3()
+  autorun4()
+});
+
+
+
+
+
