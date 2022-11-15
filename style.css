@@ -20,7 +20,8 @@
 }
 .carouselContinar {
   width: 70%;
-  margin: auto;
+  margin: 30px auto;
+
   overflow: hidden;
   position: relative;
 }
@@ -75,7 +76,7 @@
   text-decoration: none;
   color: rgb(245, 131, 74);
 }
-.text-center {
+.text-p {
   font-size: large;
   font-style: italic;
   font-weight: 600;
