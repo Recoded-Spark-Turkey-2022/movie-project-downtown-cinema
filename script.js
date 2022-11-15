@@ -240,66 +240,6 @@ const renderMoviesSortable = async (genreID) => {
   // renderMoviesSortable(28);
 };
 
-// const secondCardContainer = document.createElement("div")
-// secondCardContainer.className="cardContainer2"
-// let moviesChosen = []
-// const renderMoviesSortable = async (genreID) => {
-//   const url = `${constructUrl("discover/movie")}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
-//   await fetch(url)
-//   .then((res) =>res.json())
-//   .then((api)=> api.results.forEach(element =>{ moviesChosen.push(element)}))
-
-//   moviesChosen.map((movie) => {
-//     // checkGenre(movie.genre_ids)
-//     const movieDiv = document.createElement("div");
-//     movieDiv.className = "card"
-
-//     const imgTag = document.createElement("img")
-//     imgTag.className = "img1"
-//     imgTag.src = `${BACKDROP_BASE_URL + movie.poster_path}`
-
-//     const titleDiv = document.createElement("div")
-//     titleDiv.className = "title"
-//     titleDiv.textContent = `${movie.title}`
-
-//     const textDiv = document.createElement("div")
-//     textDiv.className = "text"
-//     textDiv.textContent = `${movie.overview}`
-
-//     const categoryDiv = document.createElement("div")
-//     categoryDiv.className = "catagory"
-//     categoryDiv.textContent=`${checkGenre(movie.genre_ids)}`
-
-//     const viewsDiv = document.createElement("div")
-//     viewsDiv.className = "views"
-//     viewsDiv.textContent = `${movie.vote_average}`
-
-//     // movieDiv.append(imgTag,titleDiv,textDiv,categoryDiv,viewsDiv)
-//     movieDiv.appendChild(imgTag)
-//     movieDiv.appendChild(titleDiv)
-//     movieDiv.appendChild(textDiv)
-//     movieDiv.appendChild(categoryDiv)
-//     movieDiv.appendChild(viewsDiv)
-
-//     // movieDiv.innerHTML =`
-//     //   <a href="#">
-//     //     <img class="img1" src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${movie.title} poster">
-//     //     <div class="title">${movie.title}</div>
-//     //     <div class="text">${movie.overview}</div>
-//     //     <a href="#"><div class="catagory">${checkGenre(movie.genre_ids)} <i class="fas fa-film"></i></div></a>
-//     //     <a href="#"><div class="views">${movie.vote_average} <i class="fa fa-star" aria-hidden="true"></i> </div></a>
-//     //   </a>`;
-
-//     console.log(movie)
-
-//     movieDiv.addEventListener("click", () => {
-//       movieDetails(movie);
-//     });
-//     secondCardContainer.appendChild(movieDiv);
-//   });
-// };
-
-
 function testing(objects){
   console.log(objects)
 }
