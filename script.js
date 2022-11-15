@@ -40,31 +40,62 @@ const fetchMovie = async (movieId) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
-const cardContainer = document.createElement("div");
-cardContainer.className = "cardContainer";
+
 const renderMovies = (movies) => {
-  movies.map((movie) => {
-    const movieDiv = document.createElement("div");
-    movieDiv.className = "card";
-    movieDiv.innerHTML = ` 
-        <img class="img1" src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${
-      movie.title
-    } poster">
-        <div class="title">${movie.title}</div>
-        <div class="text">${movie.overview}</div>
-        <div class="catagory">${checkGenre(
-          movie.genre_ids
-        )} <i class="fas fa-film"></i></div>
-        <div class="views">${
-          movie.vote_average
-        } <i class="fa fa-star" aria-hidden="true"></i> </div>`;
+  const carouselContinar = document.querySelector(".carouselContinar");
+  const upperSection = document.querySelector(".upperSection");
+  const carouselSlide = document.createElement("div");
+  carouselSlide.className = "carouselSlide";
+  let x = 0;
+  movies.map((movie, i) => {
+    const movieDiv = document.createElement("img");
+
+    movieDiv.setAttribute("src", `${BACKDROP_BASE_URL + movie.backdrop_path}`);
+    movieDiv.setAttribute("alt", `${movie.title} poster">`);
+
+    movieDiv.setAttribute("class", "slideImag");
+    movieDiv.setAttribute("id", `image${i + 1}`);
+    x++;
+
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
-    cardContainer.appendChild(movieDiv);
+
+    carouselSlide.appendChild(movieDiv);
+  });
+
+  carouselContinar.appendChild(carouselSlide);
+  upperSection.appendChild(carouselContinar);
+
+  const btnPrev = document.createElement("button");
+  btnPrev.id = "btnPrev";
+  const btnNext = document.createElement("button");
+  btnNext.id = "btnNext";
+  btnPrev.innerHTML = `&lt;`;
+  btnNext.innerHTML = `&gt;`;
+  carouselContinar.appendChild(btnPrev);
+  carouselContinar.appendChild(btnNext);
+
+  const carouselImage = document.querySelectorAll(".carouselSlide img");
+
+  let counter = 0;
+  const size = carouselImage[0].clientWidth;
+
+  btnNext.addEventListener("click", () => {
+    if (counter >= x - 1) return;
+    carouselSlide.style.transition = "transform 0.4s ease-in-out";
+    counter++;
+    carouselSlide.style.transform = "translateX(" + -size * counter + "px)";
+  });
+
+  btnPrev.addEventListener("click", () => {
+    if (counter <= 0) return;
+    carouselSlide.style.transition = "transform 0.4s ease-in-out";
+    counter--;
+    carouselSlide.style.transform = "translateX(" + -size * counter + "px)";
   });
 };
-CONTAINER.appendChild(cardContainer);
+
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie) => {
@@ -97,7 +128,7 @@ const autorun2 = async () => {
     url = constructUrl(urlArr[i]);
     fetch(url)
       .then((res) => res.json())
-      .then((api) => renderHorizontalSection(api.results));
+      .then((api) => testing(api.results));
   }
 };
 
@@ -132,33 +163,10 @@ const autorun4 = () => {
     .then((api) => api.results.map((actors) => console.log(actors.name)));
 };
 
-const scroller = document.createElement("div");
-scroller.className = "myScroll";
-CONTAINER.appendChild(scroller);
-const renderHorizontalSection = (movies) => {
-  const homeMidContainer = document.createElement("div");
-  homeMidContainer.className = "homeMidContainer";
-  movies.map((movie) => {
-    const movieDiv = document.createElement("div");
-    movieDiv.className = "movie";
-
-    movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster">
-        <h3>Rat${movie.title}</h3>`;
-    movieDiv.addEventListener("click", () => {
-      movieDetails(movie);
-    });
-    homeMidContainer.appendChild(movieDiv);
-  });
-  scroller.appendChild(homeMidContainer);
-};
-CONTAINER.appendChild(scroller);
 
 document.addEventListener("DOMContentLoaded", async () => {
   await autorun3();
-  // autorun()
+  autorun()
   // autorun2()
   // autorun4()
   movieBranch();
@@ -196,6 +204,7 @@ const renderMoviesSortable = async (genreID) => {
 
   console.log({ moviesChosen });
   const newDiv = document.createElement("div");
+  newDiv.className = "moviesDiv"
 
   moviesChosen.map((movie) => {
     // checkGenre(movie.genre_ids)
@@ -289,3 +298,8 @@ const renderMoviesSortable = async (genreID) => {
 //     secondCardContainer.appendChild(movieDiv);
 //   });
 // };
+
+
+function testing(objects){
+  console.log(objects)
+}
