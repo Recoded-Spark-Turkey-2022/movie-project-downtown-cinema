@@ -80,7 +80,53 @@
   font-size: large;
   font-style: italic;
   font-weight: 600;
+  text-align: center;
 }
 .soicalMedia {
   transform: translateX(50%);
+}
+.navbar {
+  width: 100%;
+  background-color: #000033;
+  height: 80px;
+}
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+}
+.navbar ul li {
+  float: left;
+  margin-top: 20px;
+}
+.navbar ul li a {
+  width: 150px;
+  color: white;
+  display: block;
+  text-decoration: none;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+.navbar ul li a:hover {
+  background-color: #669900;
+}
+.navbar ul li ul {
+  background-color: #000033;
+  display: none;
+}
+.navbar ul li ul li {
+  float: none;
+}
+.navbar ul li:hover ul {
+  display: block;
+  z-index: 4;
+}
+#sreach {
+  position: absolute;
+  right: 5%;
 }
