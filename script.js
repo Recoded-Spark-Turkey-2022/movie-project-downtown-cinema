@@ -176,14 +176,33 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function movieBranch() {
   const allButtonsDiv = document.createElement("div");
   allButtonsDiv.className = "allButtons";
+  let navGenre = document.getElementById(`navs`)
   // CONTAINER.textContent= ``
   genreIds.map((movie) => {
+    //Secondary Buttonss
+    let btn2 = document.createElement("button");
+    let list = document.createElement("li")
+
+    btn2.textContent = `${movie.name}`;
+    btn2.type = "button";
+    btn2.className = "button-78";
+    btn2.value = `${movie.id}`;
+  
+    list.innerHTML=btn2.outerHTML
+    navGenre.appendChild(list)
+
+    list.addEventListener("click", () => {
+      console.log("test")
+      renderMoviesSortable(btn2.value);
+    });
+
+    //Main Buttons
     let btn = document.createElement("button");
     btn.textContent = `${movie.name}`;
     btn.type = "button";
     btn.className = "button-78";
     btn.value = `${movie.id}`;
-    console.log(btn);
+
     btn.addEventListener("click", () => {
       renderMoviesSortable(btn.value);
     });
