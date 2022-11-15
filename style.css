@@ -15,6 +15,9 @@
 #actors {
   margin: 24px 16px 0 0;
 }
+.upperSection {
+  width: 90%;
+}
 .carouselContinar {
   width: 70%;
   margin: auto;
@@ -26,6 +29,7 @@
   height: 100%;
   width: 100%;
 }
+
 #btnNext {
   position: absolute;
   top: 45%;
@@ -33,10 +37,11 @@
 
   background-color: transparent;
   border: none;
-  font-size: 36px;
-  color: gold;
+  font-size: 50px;
+  font-weight: bolder;
+  color: white;
   text-align: center;
-  line-height: 0;
+  opacity: 0.9;
 }
 #btnPrev {
   position: absolute;
@@ -44,8 +49,9 @@
   left: 0;
   background-color: transparent;
   border: none;
-  font-size: 36px;
-  color: gold;
+  font-size: 50px;
+  font-weight: bolder;
+  color: white;
   text-align: center;
-  line-height: 0;
+  opacity: 0.9;
 }

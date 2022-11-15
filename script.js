@@ -40,8 +40,8 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
-  const carouselContinar = document.createElement("div");
-  carouselContinar.className = "carouselContinar";
+  const carouselContinar = document.querySelector(".carouselContinar");
+  const upperSection = document.querySelector(".upperSection");
   const carouselSlide = document.createElement("div");
   carouselSlide.className = "carouselSlide";
   let x = 0;
@@ -62,7 +62,7 @@ const renderMovies = (movies) => {
   });
 
   carouselContinar.appendChild(carouselSlide);
-  CONTAINER.appendChild(carouselContinar);
+  upperSection.appendChild(carouselContinar);
 
   const btnPrev = document.createElement("button");
   btnPrev.id = "btnPrev";
