@@ -4,6 +4,7 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
+const BUTTON_CONTAINER = document.querySelector("#buttons-container");
 
 // Don't touch this function please
 const autorun = async () => {
@@ -95,6 +96,7 @@ const renderMovies = (movies) => {
   });
 };
 
+
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie) => {
   CONTAINER.innerHTML = `
@@ -119,48 +121,125 @@ const renderMovie = (movie) => {
     </div>`;
 };
 
-const autorun2 = async () =>{
-  let url = undefined
-  const urlArr = ["movie/top_rated","movie/popular","movie/upcoming"]
-  for(let i=0;i<3;i++){
+const autorun2 = async () => {
+  let url = undefined;
+  const urlArr = ["movie/top_rated", "movie/popular", "movie/upcoming"];
+  for (let i = 0; i < 3; i++) {
     url = constructUrl(urlArr[i]);
     fetch(url)
-    .then((res) =>res.json())
-    .then((api)=> renderHorizontalSection(api.results))
+      .then((res) => res.json())
+      .then((api) => testing(api.results));
   }
-}
+};
 
-let genreIds = []
-const autorun3 =()=> {
+let genreIds = [];
+const autorun3 = async () => {
   const url = `${constructUrl("genre/movie/list")}&language=en-US`;
-  fetch(url)
-  .then((res) =>res.json())
-  .then((api)=> api.genres.forEach(element => {genreIds.push(element)} ))
-}
+  await fetch(url)
+    .then((res) => res.json())
+    .then((api) =>
+      api.genres.forEach((element) => {
+        genreIds.push(element);
+      })
+    );
+};
 
-function checkGenre (genreIdCalled){
-  for(let i = 0; genreIds.length; i++ ){
-    if(genreIdCalled[0]===genreIds[i].id) 
-    return genreIds[i].name
+function checkGenre(genreIdCalled) {
+  for (let i = 0; genreIds.length; i++) {
+    if (genreIdCalled[0] === genreIds[i].id) return genreIds[i].name;
   }
 }
 
-const autorun4 =()=> {
+function checkGenreV2(genreIdCalled) {
+  for (let i = 0; genreIds.length; i++) {
+    if (genreIdCalled === genreIds[i].id) return genreIds[i].name;
+  }
+}
+
+const autorun4 = () => {
   const url = `${constructUrl("person/popular")}&language=en-US&page=1`;
   fetch(url)
-  .then((res) =>res.json())
-  .then((api)=> api.results.map((actors)=>console.log(actors.name)))
-}
+    .then((res) => res.json())
+    .then((api) => api.results.map((actors) => console.log(actors.name)));
+};
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", async () => {
+  await autorun3();
   autorun()
-  autorun2()
-  autorun3()
-  autorun4()
+  // autorun2()
+  // autorun4()
+  movieBranch();
+  renderMoviesSortable(28)
 });
 
+async function movieBranch() {
+  const allButtonsDiv = document.createElement("div");
+  allButtonsDiv.className = "allButtons";
+  // CONTAINER.textContent= ``
+  genreIds.map((movie) => {
+    let btn = document.createElement("button");
+    btn.textContent = `${movie.name}`;
+    btn.type = "button";
+    btn.className = "button-78";
+    btn.value = `${movie.id}`;
+    console.log(btn);
+    btn.addEventListener("click", () => {
+      renderMoviesSortable(btn.value);
+    });
+    allButtonsDiv.appendChild(btn);
+  });
+  BUTTON_CONTAINER.appendChild(allButtonsDiv);
+}
 
+const secondCardContainer = document.createElement("div");
+secondCardContainer.className = "cardContainer2";
+const renderMoviesSortable = async (genreID) => {
+  let moviesChosen = [];
+  const url = `${constructUrl(
+    "discover/movie"
+  )}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
+  const data = await fetch(url);
+  moviesChosen = (await data.json()).results;
 
+  console.log({ moviesChosen });
+  const newDiv = document.createElement("div");
+  newDiv.className = "moviesDiv"
 
+  moviesChosen.map((movie) => {
+    // checkGenre(movie.genre_ids)
+    const movieDiv = document.createElement("div");
+    movieDiv.className = "card";
 
+    movieDiv.innerHTML = ` 
+        <a href="#">
+          <img class="img1" src="${
+            BACKDROP_BASE_URL + movie.poster_path
+          }" alt="${movie.title} poster">
+          <div class="title">${movie.title}</div>
+          <div class="text">${movie.overview}</div>
+          <a href="#"><div class="catagory">${checkGenre(
+            movie.genre_ids
+          )} <i class="fas fa-film"></i></div></a>
+          <a href="#"><div class="views">${
+            movie.vote_average
+          } <i class="fa fa-star" aria-hidden="true"></i> </div></a>
+        </a>`;
+
+    movieDiv.addEventListener("click", () => {
+      movieDetails(movie);
+    });
+    newDiv.appendChild(movieDiv);
+    newDiv.setAttribute("children", newDiv.childElementCount);
+  });
+  secondCardContainer.innerHTML = " ";
+  secondCardContainer.appendChild(newDiv);
+
+  // CONTAINER.innerHTML = "";
+  CONTAINER.appendChild(secondCardContainer);
+  // renderMoviesSortable(28);
+};
+
+function testing(objects){
+  console.log(objects)
+}

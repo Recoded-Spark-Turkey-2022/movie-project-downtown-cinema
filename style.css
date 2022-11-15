@@ -9,7 +9,7 @@
 }
 
 .container {
-  padding-top: 32px;
+    padding-top: 32px;
 }
 
 #actors {
@@ -36,6 +36,32 @@
   top: 45%;
   right: 0;
 
+.moviesDiv{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+}
+/* Navbar and Mid section start */
+.upperSection {
+  width: 90%;
+}
+.carouselContinar {
+  width: 70%;
+  margin: 30px auto;
+
+  overflow: hidden;
+  position: relative;
+}
+.carouselSlide {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+#btnNext {
+  position: absolute;
+  top: 45%;
+  right: 0;
   background-color: transparent;
   border: none;
   font-size: 50px;
@@ -130,3 +156,124 @@
   position: absolute;
   right: 5%;
 }
+
+/* Navbar and Mid section End */
+/* Movie Card Start */
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+    width: 320px;
+    height: 450px;
+    margin: 50px auto;
+    background: #2a264f;
+    border: 5px solid #1a163f;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #2a264f;
+  }
+  
+  .card .img1 {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  
+  
+  .card .title {
+    height: 22%;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    padding: 15px 10px;
+    position: absolute;
+    left: 0;
+    transform: translate(160px, 0);
+    opacity: 0;
+    transition: all 0.5s ease;
+    /* box-shadow: 0 -95px 28px -25px #000 inset; */
+  }
+
+  .card .text {
+    position: absolute;
+    bottom: 80px;
+    height: 120px;
+    padding: 15px 10px;
+    text-align: center;
+    font-size: 17px;
+    color: #fff;
+    transform: rotate(90deg);
+    transform-origin: 0 100px;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  
+  .card .catagory {
+    position: absolute;
+    left: 10px;
+    top: 140px;
+    padding: 3px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    background: #2a264f;
+    color: #fff;
+    border-radius: 5px;
+    transform: translate(-160px, 0);
+    transition: all 0.5s ease;
+  }
+  
+  .card .views {
+    position: absolute;
+    left: 10px;
+    top: 175px;
+    padding: 3px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    background: #8b2463;
+    color: #fff;
+    border-radius: 5px;
+    transform: translate(-160px, 0);
+    transition: all 0.5s ease 0.15s;
+  }
+    
+  .card:hover .title {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  .card:hover .text {
+    opacity: 0.8;
+    transform: rotate(0deg);
+  }
+  
+  .card:hover .views,
+  .card:hover .catagory {
+    transform: translate(0);
+  }
+  
+/* Movie Card End  */
+
+
+
+.cardContainer2{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
