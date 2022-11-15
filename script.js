@@ -39,29 +39,25 @@ const fetchMovie = async (movieId) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
+const cardContainer = document.createElement("div")
+cardContainer.className="cardContainer"
 const renderMovies = (movies) => {
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.className = "card"
     movieDiv.innerHTML =` 
-      <a href="#">
         <img class="img1" src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${movie.title} poster">
         <div class="title">${movie.title}</div>
         <div class="text">${movie.overview}</div>
-        <a href="#"><div class="catagory">${checkGenre(movie.genre_ids)} <i class="fas fa-film"></i></div></a>
-        <a href="#"><div class="views">${movie.vote_average} <i class="fa fa-star" aria-hidden="true"></i> </div></a>
-      </a>`;
-    // movieDiv.innerHTML = `
-    //     <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-    //   movie.title
-    // } poster">
-    //     <h3>${movie.title}</h3>`;
+        <div class="catagory">${checkGenre(movie.genre_ids)} <i class="fas fa-film"></i></div>
+        <div class="views">${movie.vote_average} <i class="fa fa-star" aria-hidden="true"></i> </div>`;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
-    CONTAINER.appendChild(movieDiv);
+    cardContainer.appendChild(movieDiv);
   });
 };
+CONTAINER.appendChild(cardContainer)
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie) => {
@@ -100,9 +96,9 @@ const autorun2 = async () =>{
 }
 
 let genreIds = []
-const autorun3 =()=> {
+const autorun3 = async()=> {
   const url = `${constructUrl("genre/movie/list")}&language=en-US`;
-  fetch(url)
+  await fetch(url)
   .then((res) =>res.json())
   .then((api)=> api.genres.forEach(element =>{ genreIds.push(element)}))
 }
@@ -110,6 +106,13 @@ const autorun3 =()=> {
 function checkGenre (genreIdCalled){
   for(let i = 0; genreIds.length; i++ ){
     if(genreIdCalled[0]===genreIds[i].id) 
+    return genreIds[i].name
+  }
+}
+
+function checkGenreV2 (genreIdCalled){
+  for(let i = 0; genreIds.length; i++ ){
+    if(genreIdCalled===genreIds[i].id) 
     return genreIds[i].name
   }
 }
@@ -145,12 +148,159 @@ const renderHorizontalSection= (movies)=>{
 CONTAINER.appendChild(scroller)
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
-  autorun3()
-  autorun()
-  autorun2()
-  autorun4()
-});
+document.addEventListener("DOMContentLoaded", async ()=>{
+    await autorun3()
+    // autorun()
+    // autorun2()
+    // autorun4()
+     movieBranch()
+  },
+);
+
+
+async function movieBranch(){
+  const allButtonsDiv = document.createElement("div");
+  allButtonsDiv.className = "allButtons"
+  // CONTAINER.textContent= ``
+  genreIds.map((movie)=>{
+    let btn = document.createElement("button");
+    btn.textContent = `${movie.name}`;
+    btn.type = "button";
+    btn.className = "button-78"; 
+    btn.value = `${movie.id}`
+    console.log(btn)
+    btn.addEventListener("click", ()=>{renderMoviesSortable(btn.value)} )
+    allButtonsDiv.appendChild(btn)
+  })
+  CONTAINER.appendChild(allButtonsDiv)
+
+
+  const secondCardContainer = document.createElement("div")
+  secondCardContainer.className="cardContainer2"
+  let moviesChosen = []
+  const renderMoviesSortable = async (genreID) => {
+    const url = `${constructUrl("discover/movie")}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
+    await fetch(url)
+    .then((res) =>res.json())
+    .then((api)=> api.results.forEach(element =>{ moviesChosen.push(element)}))
+    const newDiv = document.createElement("div")
+    moviesChosen.map((movie) => {
+      // checkGenre(movie.genre_ids)
+      const movieDiv = document.createElement("div");
+      movieDiv.className = "card"
+  
+      const imgTag = document.createElement("img")
+      imgTag.className = "img1"
+      imgTag.src = `${BACKDROP_BASE_URL + movie.poster_path}`
+  
+      const titleDiv = document.createElement("div")
+      titleDiv.className = "title"
+      titleDiv.textContent = `${movie.title}`
+  
+      const textDiv = document.createElement("div")
+      textDiv.className = "text"
+      textDiv.textContent = `${movie.overview}`
+  
+      const categoryDiv = document.createElement("div")
+      categoryDiv.className = "catagory"
+      // categoryDiv.textContent=`${checkGenreV2(genreID)}`
+  
+      const viewsDiv = document.createElement("div")
+      viewsDiv.className = "views"
+      viewsDiv.textContent = `${movie.vote_average}`
+  
+      // movieDiv.append(imgTag,titleDiv,textDiv,categoryDiv,viewsDiv)
+      movieDiv.appendChild(imgTag)
+      movieDiv.appendChild(titleDiv)
+      movieDiv.appendChild(textDiv)
+      movieDiv.appendChild(categoryDiv)
+      movieDiv.appendChild(viewsDiv)
+  
+      // movieDiv.innerHTML =` 
+      //   <a href="#">
+      //     <img class="img1" src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${movie.title} poster">
+      //     <div class="title">${movie.title}</div>
+      //     <div class="text">${movie.overview}</div>
+      //     <a href="#"><div class="catagory">${checkGenre(movie.genre_ids)} <i class="fas fa-film"></i></div></a>
+      //     <a href="#"><div class="views">${movie.vote_average} <i class="fa fa-star" aria-hidden="true"></i> </div></a>
+      //   </a>`;
+
+  
+      movieDiv.addEventListener("click", () => {
+        movieDetails(movie);
+      });
+      newDiv.appendChild(movieDiv)
+    });
+    secondCardContainer.innerHTML=" "
+    secondCardContainer.appendChild(newDiv);
+
+  };
+  CONTAINER.appendChild(secondCardContainer)
+  renderMoviesSortable(28)
+
+}
+
+// const secondCardContainer = document.createElement("div")
+// secondCardContainer.className="cardContainer2"
+// let moviesChosen = []
+// const renderMoviesSortable = async (genreID) => {
+//   const url = `${constructUrl("discover/movie")}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
+//   await fetch(url)
+//   .then((res) =>res.json())
+//   .then((api)=> api.results.forEach(element =>{ moviesChosen.push(element)}))
+
+//   moviesChosen.map((movie) => {
+//     // checkGenre(movie.genre_ids)
+//     const movieDiv = document.createElement("div");
+//     movieDiv.className = "card"
+
+//     const imgTag = document.createElement("img")
+//     imgTag.className = "img1"
+//     imgTag.src = `${BACKDROP_BASE_URL + movie.poster_path}`
+
+//     const titleDiv = document.createElement("div")
+//     titleDiv.className = "title"
+//     titleDiv.textContent = `${movie.title}`
+
+//     const textDiv = document.createElement("div")
+//     textDiv.className = "text"
+//     textDiv.textContent = `${movie.overview}`
+
+//     const categoryDiv = document.createElement("div")
+//     categoryDiv.className = "catagory"
+//     categoryDiv.textContent=`${checkGenre(movie.genre_ids)}`
+
+//     const viewsDiv = document.createElement("div")
+//     viewsDiv.className = "views"
+//     viewsDiv.textContent = `${movie.vote_average}`
+
+//     // movieDiv.append(imgTag,titleDiv,textDiv,categoryDiv,viewsDiv)
+//     movieDiv.appendChild(imgTag)
+//     movieDiv.appendChild(titleDiv)
+//     movieDiv.appendChild(textDiv)
+//     movieDiv.appendChild(categoryDiv)
+//     movieDiv.appendChild(viewsDiv)
+
+//     // movieDiv.innerHTML =` 
+//     //   <a href="#">
+//     //     <img class="img1" src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${movie.title} poster">
+//     //     <div class="title">${movie.title}</div>
+//     //     <div class="text">${movie.overview}</div>
+//     //     <a href="#"><div class="catagory">${checkGenre(movie.genre_ids)} <i class="fas fa-film"></i></div></a>
+//     //     <a href="#"><div class="views">${movie.vote_average} <i class="fa fa-star" aria-hidden="true"></i> </div></a>
+//     //   </a>`;
+
+//     console.log(movie)
+
+//     movieDiv.addEventListener("click", () => {
+//       movieDetails(movie);
+//     });
+//     secondCardContainer.appendChild(movieDiv);
+//   });
+// };
+
+
+
 
 
 
