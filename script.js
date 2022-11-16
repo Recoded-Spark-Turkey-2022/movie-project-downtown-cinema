@@ -121,16 +121,16 @@ const renderMovie = (movie) => {
     </div>`;
 };
 
-const autorun2 = async () => {
-  let url = undefined;
-  const urlArr = ["movie/top_rated", "movie/popular", "movie/upcoming"];
-  for (let i = 0; i < 3; i++) {
-    url = constructUrl(urlArr[i]);
-    fetch(url)
-      .then((res) => res.json())
-      .then((api) => testing(api.results));
-  }
-};
+// const autorun2 = async () => {
+//   let url = undefined;
+//   const urlArr = ["movie/top_rated", "movie/popular", "movie/upcoming"];
+//   for (let i = 0; i < 3; i++) {
+//     url = constructUrl(urlArr[i]);
+//     fetch(url)
+//       .then((res) => res.json())
+//       .then((api) => testing(api.results));
+//   }
+// };
 
 let genreIds = [];
 const autorun3 = async () => {
@@ -170,14 +170,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   // autorun2()
   // autorun4()
   movieBranch();
+  movieBranchV2();
   renderMoviesSortable(28)
 });
 
 async function movieBranch() {
-  const allButtonsDiv = document.createElement("div");
-  allButtonsDiv.className = "allButtons";
+  // const allButtonsDiv = document.createElement("div");
+  // allButtonsDiv.className = "allButtons";
   let navGenre = document.getElementById(`navs`)
-  // CONTAINER.textContent= ``
+  
   genreIds.map((movie) => {
     //Secondary Buttonss
     let btn2 = document.createElement("button");
@@ -203,21 +204,26 @@ async function movieBranch() {
     btn.className = "button-78";
     btn.value = `${movie.id}`;
 
-    btn.addEventListener("click", () => {
-      renderMoviesSortable(btn.value);
-    });
-    allButtonsDiv.appendChild(btn);
+  //   btn.addEventListener("click", () => {
+  //     renderMoviesSortable(btn.value);
+  //   });
+  //   allButtonsDiv.appendChild(btn);
   });
-  BUTTON_CONTAINER.appendChild(allButtonsDiv);
+  // BUTTON_CONTAINER.appendChild(allButtonsDiv);
 }
 
 const secondCardContainer = document.createElement("div");
 secondCardContainer.className = "cardContainer2";
 const renderMoviesSortable = async (genreID) => {
+  let url = undefined
   let moviesChosen = [];
-  const url = `${constructUrl(
-    "discover/movie"
-  )}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
+  
+  if(genreID == 0) url = constructUrl("movie/top_rated")
+  else if (genreID==1) url = constructUrl("movie/popular")
+  else if (genreID==2) url = constructUrl("movie/upcoming")
+  else  url = `${constructUrl("discover/movie")}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
+  
+
   const data = await fetch(url);
   moviesChosen = (await data.json()).results;
 
@@ -262,3 +268,25 @@ const renderMoviesSortable = async (genreID) => {
 function testing(objects){
   console.log(objects)
 }
+function movieBranchV2() {
+  const allButtonsDiv = document.createElement("div");
+  allButtonsDiv.className = "allButtons";
+
+  const mainButtonsData = [{id:0 , name:"top_rated"},{id:1 , name:"Popular"},{id:2 , name:"Upcoming"}]
+  
+  mainButtonsData.map((movie) => {
+    //Main Buttons
+    let btn = document.createElement("button");
+    btn.textContent = `${movie.name}`;
+    btn.type = "button";
+    btn.className = "button-78";
+    btn.value = `${movie.id}`;
+
+    btn.addEventListener("click", () => {
+      renderMoviesSortable(btn.value);
+    });
+    allButtonsDiv.appendChild(btn);
+  });
+  BUTTON_CONTAINER.appendChild(allButtonsDiv);
+}
+
