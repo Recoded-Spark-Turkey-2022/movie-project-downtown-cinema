@@ -251,15 +251,15 @@ actorBtn.addEventListener("click", (e) => {
     .then((res) => res.json())
     .then((data) => {
       const rowDiv = document.createElement("div");
-      rowDiv.setAttribute("class", "row");
+      rowDiv.setAttribute("class", "rowcards");
       if (data.results) {
         data.results.map((actorBlock) => {
           if (actorBlock.known_for.length > 0) {
             const actorDiv = document.createElement("div");
-            actorDiv.setAttribute("class", "col-sm-12 col-md-6 col-lg-3");
+            actorDiv.setAttribute("class", "cards");
 
             actorDiv.innerHTML = `
-      <div class="card mb-4" style="height:38em;">
+      <div class="innercard">
       <img src="${BACKDROP_BASE_URL + actorBlock.profile_path}" alt="${
               actorBlock.name
             } actor">
