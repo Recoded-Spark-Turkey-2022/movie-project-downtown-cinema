@@ -284,7 +284,7 @@ a {
 
 .rowcards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
   color: white;
   margin-bottom: 20px;
@@ -296,15 +296,14 @@ a {
   background-color: #10cfcf;
 }
 @media (max-width: 1200px) {
-  .cardContainer2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .rowcards {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    color: white;
+    margin-bottom: 20px;
   }
   .innercard img {
-    width: 250px;
+    width: 100%;
   }
 }
