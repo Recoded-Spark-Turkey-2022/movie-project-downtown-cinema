@@ -112,13 +112,37 @@ const renderMovie = (movie) => {
               movie.release_date
             }</p>
             <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
-            <h3>Overview:</h3>
+            <h3 class="Overview">Overview:</h3>
             <p id="movie-overview">${movie.overview}</p>
         </div>
         </div>
-            <h3>Actors:</h3>
+            <h3 id="Actors">Actors:</h3>
             <ul id="actors" class="list-unstyled"></ul>
-    </div>`;
+    </div>
+  <div class="all_actors">
+  <div class="actors_pro">
+  <img src="https://media.allure.com/photos/5a2ff4afdd0c5b5b96b21692/4:3/w_2220,h_1665,c_limit/GettyImages-884266074.jpg" class="img_actor">
+  <h3 class="sia">sia</h3>
+  </div>
+  <div class="actors_pro">
+  <img src="https://media.allure.com/photos/5a2ff4afdd0c5b5b96b21692/4:3/w_2220,h_1665,c_limit/GettyImages-884266074.jpg" class="img_actor">
+  <h3 class="sia">sia</h3>
+  </div>
+  <div class="actors_pro">
+  <img src="https://media.allure.com/photos/5a2ff4afdd0c5b5b96b21692/4:3/w_2220,h_1665,c_limit/GettyImages-884266074.jpg" class="img_actor">
+  <h3 class="sia">sia</h3>
+  </div>
+  <div class="actors_pro">
+  <img src="https://media.allure.com/photos/5a2ff4afdd0c5b5b96b21692/4:3/w_2220,h_1665,c_limit/GettyImages-884266074.jpg" class="img_actor">
+  <h3 class="sia">sia</h3>
+  </div>
+  <div class="actors_pro">
+  <img src="https://media.allure.com/photos/5a2ff4afdd0c5b5b96b21692/4:3/w_2220,h_1665,c_limit/GettyImages-884266074.jpg" class="img_actor">
+  <h3 class="sia">sia</h3>
+  </div>
+
+  </div>
+`;
 };
 
 // const autorun2 = async () => {
@@ -162,6 +186,7 @@ const autorun4 = () => {
     .then((res) => res.json())
     .then((api) => api.results.map((actors) => console.log(actors.name)));
 };
+
 
 
 document.addEventListener("DOMContentLoaded", async () => {

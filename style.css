@@ -297,3 +297,57 @@
 
 /* Main Movie Container End */
 
+.img_actor{
+	border-radius: 50%;
+  width: 80%;
+  border: 4px outset #FFD700 ;
+}
+
+.actor_pro{
+  text-align: center;
+  
+
+}
+.all_actors{
+  display:flex;
+  text-align: center;
+  border: 4px outset #FFD700 ;
+  height: 250px;
+  align-items: center;
+  
+}
+
+body{
+  background-color: #000;
+}
+#movie-title{
+  color:#FFD700 ;
+  text-shadow: 3px 3px 6px #e9d553 ;
+}
+#movie-release-date{
+  color:white ;
+}
+#movie-runtime{
+  color:white;
+}
+.Overview{
+  color:#FFD700;
+  text-shadow: 3px 3px 6px #e9d553 ;
+ 
+}
+#movie-overview{
+  color:white;
+}
+#Actors{
+  color: hsl(51, 100%, 50%);
+  text-shadow: 3px 3px 6px #e9d553 ;
+}
+.list-unstyled{
+  color:white;
+}
+.sia{
+  color:white;
+}
+#movie-backdrop{
+  border: 4px outset hsl(51, 100%, 50%) ;
+}
