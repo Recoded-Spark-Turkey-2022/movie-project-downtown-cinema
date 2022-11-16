@@ -311,7 +311,7 @@ function movieBranchV2() {
   const allButtonsDiv = document.createElement("div");
   allButtonsDiv.className = "allButtons";
 
-  const mainButtonsData = [{id:0 , name:"top_rated"},{id:1 , name:"Popular"},{id:2 , name:"Upcoming"}]
+  const mainButtonsData = [{id:0 , name:"Top Rated"},{id:1 , name:"Popular"},{id:2 , name:"Upcoming"}]
   
   mainButtonsData.map((movie) => {
     //Main Buttons
