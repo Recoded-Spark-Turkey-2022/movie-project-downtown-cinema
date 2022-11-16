@@ -96,7 +96,6 @@ const renderMovies = (movies) => {
   });
 };
 
-
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie) => {
   CONTAINER.innerHTML = `
@@ -163,14 +162,13 @@ const autorun4 = () => {
     .then((api) => api.results.map((actors) => console.log(actors.name)));
 };
 
-
 document.addEventListener("DOMContentLoaded", async () => {
   await autorun3();
-  autorun()
+  autorun();
   // autorun2()
   // autorun4()
   movieBranch();
-  renderMoviesSortable(28)
+  renderMoviesSortable(28);
 });
 
 async function movieBranch() {
@@ -204,7 +202,7 @@ const renderMoviesSortable = async (genreID) => {
 
   console.log({ moviesChosen });
   const newDiv = document.createElement("div");
-  newDiv.className = "moviesDiv"
+  newDiv.className = "moviesDiv";
 
   moviesChosen.map((movie) => {
     // checkGenre(movie.genre_ids)
@@ -240,6 +238,47 @@ const renderMoviesSortable = async (genreID) => {
   // renderMoviesSortable(28);
 };
 
-function testing(objects){
-  console.log(objects)
+function testing(objects) {
+  console.log(objects);
 }
+// start form here
+const actorBtn = document.querySelector(".Actor");
+actorBtn.addEventListener("click", (e) => {
+  CONTAINER.innerHTML = ``;
+
+  const url = constructUrl(`person/popular`);
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      const rowDiv = document.createElement("div");
+      rowDiv.setAttribute("class", "row");
+      if (data.results) {
+        data.results.map((actorBlock) => {
+          if (actorBlock.known_for.length > 0) {
+            const actorDiv = document.createElement("div");
+            actorDiv.setAttribute("class", "col-sm-12 col-md-6 col-lg-3");
+
+            actorDiv.innerHTML = `
+      <div class="card mb-4" style="height:38em;">
+      <img src="${BACKDROP_BASE_URL + actorBlock.profile_path}" alt="${
+              actorBlock.name
+            } actor">
+      <div class="card-body">
+  
+      <h3 class="card-title text-black">${actorBlock.name}</h3>
+        <div class="mt-3 text-start">Gender: <b>${
+          actorBlock.gender === 1 ? "Female" : "Male"
+        }</b> </div>
+        <div class="mt-3 text-start">Popularity: <b>${
+          actorBlock.popularity
+        }</b></div>
+      </div>
+    </div>`;
+
+            rowDiv.append(actorDiv);
+            CONTAINER.appendChild(rowDiv);
+          }
+        });
+      }
+    });
+});
