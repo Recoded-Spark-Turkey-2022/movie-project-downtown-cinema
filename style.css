@@ -123,6 +123,8 @@
   width: 100%;
   background-color: #000033;
   height: 80px;
+  position: fixed;
+  z-index: 1;
 }
 .navbar ul {
   list-style: none;
@@ -278,10 +280,20 @@
   
 /* Movie Card End  */
 
+/* Main Buttons Start */
+.allButtons{
+  display: flex;
+  justify-content: space-evenly;
+  padding-right: 10%;
+}
 
+/* Main Buttons End */
 
+/* Main Movie Container Start */
 .cardContainer2{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
+/* Main Movie Container End */
 
