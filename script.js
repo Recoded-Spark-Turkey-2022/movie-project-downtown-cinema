@@ -318,7 +318,7 @@ function movieBranchV2() {
     let btn = document.createElement("button");
     btn.textContent = `${movie.name}`;
     btn.type = "button";
-    btn.className = "button-78";
+    btn.className = "button-1";
     btn.value = `${movie.id}`;
 
     btn.addEventListener("click", () => {
