@@ -97,27 +97,119 @@ const renderMovies = (movies) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie) => {
+const renderMovie =  async (movie) => {
+  const movieId = movie.id
+
+  const urlDetails = `${constructUrl(`/movie/${movieId}`)}&language=en-US&page=1`
+  const dataDetails = await fetch(urlDetails);
+  const moviesDetails = (await dataDetails.json());
+  // const productionCompanyshrotened = moviesDetails.production_companies.forEach((company)=>{
+  //     if(company.logo_path !==null) productionCompanyshrotened.push(company)
+  //   })
+  //   console.log(productionCompanyshrotened)
+  const productionCompany = moviesDetails.production_companies
+  console.log(productionCompany)
+  // productionCompany.forEach((company)=>{
+  //   if(company.logo_path) productionCompanyshrotened.push(company)
+  //   console.log(productionCompanyshrotened)
+  // })
+
+  const urlActors = `${constructUrl(`/movie/${movieId}/credits`)}&language=en-US&page=1`
+  const dataActors = await fetch(urlActors);
+  const moviesActors = (await dataActors.json()).cast;
+  let director = undefined
+  let singleMovieActors = []
+  for(let i =0 ; moviesActors.length;i++){
+    if(moviesActors[i].known_for_department==="Acting") singleMovieActors.push(moviesActors[i])
+    // if(moviesActors[i].known_for_department ==="Directing") {
+    //   director = moviesActors[i].name
+    //   console.lof("test")
+    //   break;}
+    if(singleMovieActors.length===5) break;
+  }
+  console.log(singleMovieActors)
+  // moviesActors.forEach((castMember)=>{
+  //   if(castMember.known_for_department==="Acting") singleMovieActors.push(castMember)
+  //   if(singleMovieActors.length===5) break;
+  // })
+
+
   CONTAINER.innerHTML = `
-    <div class="row">
-        <div class="col-md-4">
-             <img id="movie-backdrop" src=${
-               BACKDROP_BASE_URL + movie.backdrop_path
-             }>
-        </div>
-        <div class="col-md-8">
-            <h2 id="movie-title">${movie.title}</h2>
-            <p id="movie-release-date"><b>Release Date:</b> ${
-              movie.release_date
-            }</p>
-            <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
-            <h3>Overview:</h3>
-            <p id="movie-overview">${movie.overview}</p>
-        </div>
-        </div>
-            <h3>Actors:</h3>
-            <ul id="actors" class="list-unstyled"></ul>
-    </div>`;
+  <div class="movie-card">
+  
+  <div class="containersmall">
+    
+      <img  "singleMoviePoster" src=${
+        BACKDROP_BASE_URL + movie.poster_path
+      } alt="cover" class="cover" /></a>
+
+    <div class="hero" >
+
+    <img class = "singleMovieImg" src=${
+      BACKDROP_BASE_URL + movie.backdrop_path
+    } alt="cover" class="cover" />
+
+
+      <div class="details">
+      
+        <div class="title1">${movie.title} </div>  
+        
+        <span class="singleRating">${moviesDetails.vote_average} <i class="fa fa-star" aria-hidden="true"></i></span><span class="likes">${movie.vote_count} <i class="fa fa-heart" aria-hidden="true"></i></span><span class="languages">${moviesDetails.original_language} <i class="fa fa-globe" aria-hidden="true"></i></span>
+        
+      </div> <!-- end details -->
+      
+  </div> <!-- end hero -->
+    
+  <div class="description">
+      
+      <div class="column1">
+        <span class="tag">    <img class="logos" src=${BACKDROP_BASE_URL + moviesDetails.production_companies[0].logo_path} alt="cover"  /></span>
+      </div> <!-- end column1 -->
+      
+      <div class="column2">
+        
+        <p>${movie.overview}<br><br>Director: </p>
+        
+        <div class="avatars">
+          
+          <img  class= "actorsInMovie" src="${BACKDROP_BASE_URL + singleMovieActors[0].profile_path}" alt="${singleMovieActors.name}" >
+          <img  class= "actorsInMovie" src="${BACKDROP_BASE_URL + singleMovieActors[1].profile_path}" alt="${singleMovieActors.name}" >
+          <img  class= "actorsInMovie" src="${BACKDROP_BASE_URL + singleMovieActors[2].profile_path}" alt="${singleMovieActors.name}" >
+          <img  class= "actorsInMovie" src="${BACKDROP_BASE_URL + singleMovieActors[3].profile_path}" alt="${singleMovieActors.name}" >
+          <img  class= "actorsInMovie" src="${BACKDROP_BASE_URL + singleMovieActors[4].profile_path}" alt="${singleMovieActors.name}" >
+
+          
+          
+      </div> <!-- end avatars -->
+        
+        
+        
+  </div> <!-- end column2 -->
+</div> <!-- end description -->`
+
+    // <div class="row">
+    //     <div class="col-md-4">
+    //          <img id="movie-backdrop" src=${
+    //            BACKDROP_BASE_URL + movie.backdrop_path
+    //          }>
+    //     </div>
+    //     <div class="col-md-8">
+    //         <h2 id="movie-title">${movie.title}</h2>
+    //         <p id="movie-release-date"><b>Release Date:</b> ${
+    //           movie.release_date
+    //         }</p>
+    //         <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
+    //         <p id="movie-rating"><b>Rating:</b> ${moviesDetails.vote_average} <i class="fa fa-star" aria-hidden="true"></i></p>
+    //         <p id="movie-language"><b>Language</b> ${moviesDetails.original_language} <i class="fa fa-globe" aria-hidden="true"></i></p>
+    //         <h3>Overview:</h3>
+    //         <p id="movie-overview">${movie.overview}</p>
+    //     </div>
+    //     </div>
+    //         <h3>Actors:</h3>
+    //         <ul id="actors" class="list-unstyled"></ul>
+    // </div>`;
+
+
 };
 
 // const autorun2 = async () => {
@@ -169,7 +261,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // autorun4()
   movieBranch();
   movieBranchV2();
-  renderMoviesSortable(28)
+  renderMoviesSortable(14)
 });
 
 async function movieBranch() {
