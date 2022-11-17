@@ -389,6 +389,10 @@ const actormovies = (movies) => {
           <p class = "filmCardtext">${movie.original_title}</p>
         </div>`;
     moviediv.appendChild(Moviescard);
+    Moviescard.addEventListener("click", () => {
+      movieDetails(movie);
+    });
+    console.log(movie);
   });
   CONTAINER.appendChild(moviediv);
 };
