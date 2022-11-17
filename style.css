@@ -154,9 +154,9 @@
 .navbar ul li ul {
   background-color: #000033;
   display: none;
-  max-height: 10rem;/*The important part*/
-  overflow-y:auto;/*Also...*/
-  overflow-x:hidden;/*And the end of the important part*/
+  max-height: 10rem; /*The important part*/
+  overflow-y: auto; /*Also...*/
+  overflow-x: hidden; /*And the end of the important part*/
 }
 .navbar ul li ul li {
   float: none;
@@ -283,14 +283,13 @@ a {
 
 /* Movie Card End  */
 
-
 /* Buttons Start */
-.allButtons{
+.allButtons {
   display: flex;
   justify-content: space-evenly;
   padding-right: 10%;
 }
-.button-78{
+.button-78 {
   background-color: #fff000;
   border-radius: 12px;
   color: #000;
@@ -312,8 +311,8 @@ a {
 .button-78:not(:disabled):focus {
   outline: 0;
   background: #f40303;
-  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
-} 
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
 
 .button-78:disabled {
   filter: saturate(0.2) opacity(0.5);
@@ -321,16 +320,17 @@ a {
   cursor: not-allowed;
 }
 
-
-.button-1{
+.button-1 {
   background-color: #cf245f;
   background-image: linear-gradient(to bottom right, #fcd34d, #ef4444, #ec4899);
   border: 0;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1.125rem; /* 18px */
   font-weight: 600;
   line-height: 1.75rem; /* 28px */
@@ -343,11 +343,10 @@ a {
 /* Buttons End */
 
 /* Main Movie Container Start */
-.cardContainer2{
+.cardContainer2 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
-
 
 .rowcards {
   display: grid;
@@ -375,8 +374,16 @@ a {
   }
 }
 
-.text-center{
+.text-center {
   color: white;
   margin-top: 5rem;
 }
 
+/* just test disgne */
+.singleActor {
+  background-color: wheat;
+  margin: 20px;
+}
+.singleActor img {
+  width: 200px;
+}

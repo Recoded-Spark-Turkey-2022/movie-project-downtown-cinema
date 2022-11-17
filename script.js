@@ -11,6 +11,20 @@ const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
 };
+// fetch one Actor information
+const fetchActor = async (actorId) => {
+  const url = constructUrl(`person/${actorId}`);
+  const res = await fetch(url);
+
+  return res.json();
+};
+
+// fetch actors movies
+const fetchActorsMovies = async (actorId) => {
+  const url = constructUrl(`person/${actorId}/movie_credits`);
+  const res = await fetch(url);
+  return res.json();
+};
 
 // Don't touch this function please
 const constructUrl = (path) => {
@@ -169,29 +183,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   // autorun4()
   movieBranch();
   movieBranchV2();
-  renderMoviesSortable(28)
+  renderMoviesSortable(28);
 });
 
 async function movieBranch() {
   // const allButtonsDiv = document.createElement("div");
   // allButtonsDiv.className = "allButtons";
-  let navGenre = document.getElementById(`navs`)
-  
+  let navGenre = document.getElementById(`navs`);
+
   genreIds.map((movie) => {
     //Secondary Buttonss
     let btn2 = document.createElement("button");
-    let list = document.createElement("li")
+    let list = document.createElement("li");
 
     btn2.textContent = `${movie.name}`;
     btn2.type = "button";
     btn2.className = "button-78";
     btn2.value = `${movie.id}`;
-  
-    list.innerHTML=btn2.outerHTML
-    navGenre.appendChild(list)
+
+    list.innerHTML = btn2.outerHTML;
+    navGenre.appendChild(list);
 
     list.addEventListener("click", () => {
-      console.log("test")
+      console.log("test");
       renderMoviesSortable(btn2.value);
     });
 
@@ -202,10 +216,10 @@ async function movieBranch() {
     btn.className = "button-78";
     btn.value = `${movie.id}`;
 
-  //   btn.addEventListener("click", () => {
-  //     renderMoviesSortable(btn.value);
-  //   });
-  //   allButtonsDiv.appendChild(btn);
+    //   btn.addEventListener("click", () => {
+    //     renderMoviesSortable(btn.value);
+    //   });
+    //   allButtonsDiv.appendChild(btn);
   });
   // BUTTON_CONTAINER.appendChild(allButtonsDiv);
 }
@@ -213,14 +227,16 @@ async function movieBranch() {
 const secondCardContainer = document.createElement("div");
 secondCardContainer.className = "cardContainer2";
 const renderMoviesSortable = async (genreID) => {
-  let url = undefined
+  let url = undefined;
   let moviesChosen = [];
-  
-  if(genreID == 0) url = constructUrl("movie/top_rated")
-  else if (genreID==1) url = constructUrl("movie/popular")
-  else if (genreID==2) url = constructUrl("movie/upcoming")
-  else  url = `${constructUrl("discover/movie")}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
-  
+
+  if (genreID == 0) url = constructUrl("movie/top_rated");
+  else if (genreID == 1) url = constructUrl("movie/popular");
+  else if (genreID == 2) url = constructUrl("movie/upcoming");
+  else
+    url = `${constructUrl(
+      "discover/movie"
+    )}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&with_watch_monetization_types=flatrate`;
 
   const data = await fetch(url);
   moviesChosen = (await data.json()).results;
@@ -275,6 +291,7 @@ actorBtn.addEventListener("click", (e) => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data.results);
       const rowDiv = document.createElement("div");
       rowDiv.setAttribute("class", "rowcards");
       if (data.results) {
@@ -299,7 +316,15 @@ actorBtn.addEventListener("click", (e) => {
         }</b></div>
       </div>
     </div>`;
-
+            actorDiv.addEventListener("click", async () => {
+              const singleAcotrPage = await fetchActor(actorBlock.id);
+              const ActorMovies1 = await fetchActorsMovies(actorBlock.id);
+              CONTAINER.innerHTML = "";
+              //   singleAcotr(singleAcotrPage);
+              singleAcotr(singleAcotrPage);
+              console.log(ActorMovies.cast);
+              ActorMovies(ActorMovies1);
+            });
             rowDiv.append(actorDiv);
             CONTAINER.appendChild(rowDiv);
           }
@@ -311,8 +336,12 @@ function movieBranchV2() {
   const allButtonsDiv = document.createElement("div");
   allButtonsDiv.className = "allButtons";
 
-  const mainButtonsData = [{id:0 , name:"Top Rated"},{id:1 , name:"Popular"},{id:2 , name:"Upcoming"}]
-  
+  const mainButtonsData = [
+    { id: 0, name: "Top Rated" },
+    { id: 1, name: "Popular" },
+    { id: 2, name: "Upcoming" },
+  ];
+
   mainButtonsData.map((movie) => {
     //Main Buttons
     let btn = document.createElement("button");
@@ -328,4 +357,21 @@ function movieBranchV2() {
   });
   BUTTON_CONTAINER.appendChild(allButtonsDiv);
 }
+const singleAcotr = (acotr) => {
+  console.log(acotr);
+  const maindiv = document.createElement("div");
+  maindiv.className = "singleActor";
+  maindiv.innerHTML = ` <h1>${acotr.name}</h2>
 
+  <img src="${BACKDROP_BASE_URL + acotr.profile_path}" alt="" />
+  <div class="actorinfo">
+    <div > Gender : ${acotr.gender === 1 ? "Female" : "Male"} </div>
+    <div > popularity : ${acotr.popularity} </div>
+    <div > birthday : ${acotr.birthday} </div>
+  </div>
+  <div class= biography>
+  <h2>Biography</h2>
+  <p> ${acotr.biography}
+  </div>`;
+  CONTAINER.appendChild(maindiv);
+};
