@@ -379,15 +379,22 @@ const actormovies = (movies) => {
   movies.cast.map((movie) => {
     moviediv.setAttribute("class", "moviesactordiv");
     const Moviescard = document.createElement("div");
-    Moviescard.setAttribute("class", "innerMoviesdiv");
+    Moviescard.setAttribute("class", "card");
 
-    Moviescard.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${
-      movie.title
-    }  >
-        <div class = "filmCardBody">
-          <p class = "filmCardtext">${movie.original_title}</p>
-        </div>`;
+    Moviescard.innerHTML =  ` 
+    <a href="#">
+      <img class="img1" src="${
+        BACKDROP_BASE_URL + movie.poster_path
+      }" alt="${movie.title} poster">
+      <div class="title">${movie.title}</div>
+      <div class="text">${movie.overview}</div>
+      <a href="#"><div class="catagory">${checkingGenreForSingleActor(
+        movie.genre_ids
+      )} <i class="fas fa-film"></i></div></a>
+      <a href="#"><div class="views">${
+        movie.vote_average
+      } <i class="fa fa-star" aria-hidden="true"></i> </div></a>
+    </a>`;
     moviediv.appendChild(Moviescard);
     Moviescard.addEventListener("click", () => {
       movieDetails(movie);
@@ -396,3 +403,16 @@ const actormovies = (movies) => {
   });
   CONTAINER.appendChild(moviediv);
 };
+
+function checkingGenreForSingleActor (genreIdCalled) {
+  let genre = undefined
+  genreIdCalled.forEach((id)=>{
+    console.log(id)
+    for (let i = 0; genreIds.length; i++) {
+      if (id === genreIds[i].id) {
+        genre=genreIds[i].name
+        break;}
+    }
+  })
+  return genre 
+}
