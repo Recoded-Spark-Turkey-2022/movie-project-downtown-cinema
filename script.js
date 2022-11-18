@@ -558,12 +558,22 @@ function sreachpage(moviess) {
   moviess.forEach((movie) => {
     console.log(movie.id);
     const SearchSingleMovie = document.createElement("div");
-    SearchSingleMovie.setAttribute("class", "SearchSingleMovie");
-    SearchSingleMovie.innerHTML = ` <img src="${
-      BACKDROP_BASE_URL + movie.poster_path
-    }" alt="" />
-   
-    `;
+    SearchSingleMovie.setAttribute("class", "card");
+    SearchSingleMovie.innerHTML = ` 
+    
+    <a href="#">
+      <img class="img1" src="${
+        BACKDROP_BASE_URL + movie.poster_path
+      }" alt="${movie.title} poster">
+      <div class="title">${movie.title}</div>
+      <div class="text">${movie.overview}</div>
+      <a href="#"><div class="catagory">${checkGenre(
+        movie.genre_ids
+      )} <i class="fas fa-film"></i></div></a>
+      <a href="#"><div class="views">${
+        movie.vote_average
+      } <i class="fa fa-star" aria-hidden="true"></i> </div></a>
+    </a>`;
 
     sreachDivResult.appendChild(SearchSingleMovie);
 
