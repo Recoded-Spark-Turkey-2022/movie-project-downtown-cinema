@@ -19,6 +19,21 @@ const fetchActor = async (actorId) => {
   return res.json();
 };
 
+// f
+const fetchTrailers = async (id) => {
+  const url = constructUrl(`movie/${id}/videos`);
+  const res = await fetch(url);
+  return res.json();
+};
+
+const fetchSimilarMovies = async () => {
+  const url = constructUrl(`movie/${movie_id}/similar`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+
 // fetch actors movies
 const fetchActorsMovies = async (actorId) => {
   const url = constructUrl(`person/${actorId}/movie_credits`);
@@ -196,6 +211,19 @@ const renderMovie = async (movie) => {
         
         <p>${movie.overview}<br><br>Director: </p> `;
 
+  const movieTrailers = await fetchTrailers(movie.id);
+  const trailer = document.createElement("div");
+  trailer.id = "trailerdiv";
+
+  const trailerKey = movieTrailers.results[0].key;
+  const trailerDiv = document.getElementById("trailer");
+  const trailerArea = document.createElement("div");
+  trailerArea.className = "trailer";
+  trailerArea.innerHTML = `<iframe src="https://www.youtube.com/embed/${trailerKey}"></iframe>`;
+
+  trailer.appendChild(trailerArea);
+  CONTAINER.appendChild(trailer);
+
   const avatars = document.createElement("div");
   const column2 = document.querySelector(".column2");
   avatars.className = "avatars";
@@ -218,66 +246,7 @@ const renderMovie = async (movie) => {
     });
   });
   column2.appendChild(avatars);
-  /*  <div class="avatars">
-          
-          <img  class= "actorsInMovie" src="${
-            BACKDROP_BASE_URL + singleMovieActors[0].profile_path
-          }" alt="${singleMovieActors.name}" >
-          <img  class= "actorsInMovie" src="${
-            BACKDROP_BASE_URL + singleMovieActors[1].profile_path
-          }" alt="${singleMovieActors.name}" >
-          <img  class= "actorsInMovie" src="${
-            BACKDROP_BASE_URL + singleMovieActors[2].profile_path
-          }" alt="${singleMovieActors.name}" >
-          <img  class= "actorsInMovie" src="${
-            BACKDROP_BASE_URL + singleMovieActors[3].profile_path
-          }" alt="${singleMovieActors.name}" >
-          <img  class= "actorsInMovie" src="${
-            BACKDROP_BASE_URL + singleMovieActors[4].profile_path
-          }" alt="${singleMovieActors.name}" >
-
-          
-          
-      </div> <!-- end avatars -->
-        
-        
-        
-  </div> <!-- end column2 -->
-</div> <!-- end description -->`;
- */
-  // <div class="row">
-  //     <div class="col-md-4">
-  //          <img id="movie-backdrop" src=${
-  //            BACKDROP_BASE_URL + movie.backdrop_path
-  //          }>
-  //     </div>
-  //     <div class="col-md-8">
-  //         <h2 id="movie-title">${movie.title}</h2>
-  //         <p id="movie-release-date"><b>Release Date:</b> ${
-  //           movie.release_date
-  //         }</p>
-  //         <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
-  //         <p id="movie-rating"><b>Rating:</b> ${moviesDetails.vote_average} <i class="fa fa-star" aria-hidden="true"></i></p>
-  //         <p id="movie-language"><b>Language</b> ${moviesDetails.original_language} <i class="fa fa-globe" aria-hidden="true"></i></p>
-  //         <h3>Overview:</h3>
-  //         <p id="movie-overview">${movie.overview}</p>
-  //     </div>
-  //     </div>
-  //         <h3>Actors:</h3>
-  //         <ul id="actors" class="list-unstyled"></ul>
-  // </div>`;
 };
-
-// const autorun2 = async () => {
-//   let url = undefined;
-//   const urlArr = ["movie/top_rated", "movie/popular", "movie/upcoming"];
-//   for (let i = 0; i < 3; i++) {
-//     url = constructUrl(urlArr[i]);
-//     fetch(url)
-//       .then((res) => res.json())
-//       .then((api) => testing(api.results));
-//   }
-// };
 
 let genreIds = [];
 const autorun3 = async () => {
@@ -595,3 +564,12 @@ function sreachpage(moviess) {
 }
 
 // srech function end from here
+
+const renderTrailer = (trailers) => {
+  const trailerKey = trailers.results[0].key;
+  const trailerDiv = document.getElementById("trailer");
+  const trailerArea = document.createElement("div");
+  trailerArea.className = "trailer";
+  trailerArea.innerHTML = `<iframe src="https://www.youtube.com/embed/${trailerKey}" allowfullscreen ></iframe>`;
+  trailerDiv.appendChild(trailerArea);
+};
