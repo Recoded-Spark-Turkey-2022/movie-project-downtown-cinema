@@ -53,6 +53,8 @@ const fetchMovie = async (movieId) => {
   return res.json();
 };
 
+// fetch by movies
+
 // You'll need to play with this function in order to add features and enhance the style.
 
 const renderMovies = (movies) => {
@@ -381,11 +383,11 @@ const actormovies = (movies) => {
     const Moviescard = document.createElement("div");
     Moviescard.setAttribute("class", "card");
 
-    Moviescard.innerHTML =  ` 
+    Moviescard.innerHTML = ` 
     <a href="#">
-      <img class="img1" src="${
-        BACKDROP_BASE_URL + movie.poster_path
-      }" alt="${movie.title} poster">
+      <img class="img1" src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${
+      movie.title
+    } poster">
       <div class="title">${movie.title}</div>
       <div class="text">${movie.overview}</div>
       <a href="#"><div class="catagory">${checkingGenreForSingleActor(
@@ -399,20 +401,58 @@ const actormovies = (movies) => {
     Moviescard.addEventListener("click", () => {
       movieDetails(movie);
     });
-    console.log(movie);
+    // console.log(movie);
   });
   CONTAINER.appendChild(moviediv);
 };
 
-function checkingGenreForSingleActor (genreIdCalled) {
-  let genre = undefined
-  genreIdCalled.forEach((id)=>{
-    console.log(id)
+function checkingGenreForSingleActor(genreIdCalled) {
+  let genre = undefined;
+  genreIdCalled.forEach((id) => {
+    console.log(id);
     for (let i = 0; genreIds.length; i++) {
       if (id === genreIds[i].id) {
-        genre=genreIds[i].name
-        break;}
+        genre = genreIds[i].name;
+        break;
+      }
     }
-  })
-  return genre 
+  });
+  return genre;
+}
+// serch funciotn start here
+const forminput = document.getElementById("sreach");
+forminput.addEventListener("keypress", async (e) => {
+  if (e.key === "Enter") {
+    const text = e.target.value;
+    const moviesname = await get_movie_by_search(text);
+    CONTAINER.innerHTML = "";
+
+    sreachpage(moviesname);
+  }
+});
+
+function sreachpage(moviess) {
+  const sreachDivResult = document.createElement("div");
+
+  sreachDivResult.setAttribute("class", "sreachDivResult");
+  moviess.forEach((movie) => {
+    console.log(movie.id);
+    const SearchSingleMovie = document.createElement("div");
+    SearchSingleMovie.setAttribute("class", "SearchSingleMovie");
+    SearchSingleMovie.innerHTML = ` <img src="${
+      BACKDROP_BASE_URL + movie.poster_path
+    }" alt="" />
+    `;
+    sreachDivResult.appendChild(SearchSingleMovie);
+  });
+  CONTAINER.appendChild(sreachDivResult);
+}
+// fetch function
+const API_KEY = `87b7a72219e91c516dfe252a080dfc25`;
+async function get_movie_by_search(search_term) {
+  const resp = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${search_term}`
+  );
+  const respData = await resp.json();
+  return respData.results;
 }

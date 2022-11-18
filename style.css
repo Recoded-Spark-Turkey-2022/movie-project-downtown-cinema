@@ -180,7 +180,7 @@
 
 body {
   font-family: sans-serif;
-  background-color: #000;
+  background-color: rgb(25, 195, 207);
 }
 
 a {
@@ -394,9 +394,13 @@ moives of actor
 .innerMoviesdiv img {
   width: 15rem;
 }
-.moviesactordiv {
+.sreachDivResult {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 30px;
   color: white;
+  gap: 10px;
+  margin: 2rem 2rem;
+}
+.SearchSingleMovie img {
+  width: 20rem;
 }
