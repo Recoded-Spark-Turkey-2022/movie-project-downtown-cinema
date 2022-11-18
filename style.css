@@ -387,3 +387,16 @@ a {
 .singleActor img {
   width: 200px;
 }
+
+/* 
+moives of actor
+*/
+.innerMoviesdiv img {
+  width: 15rem;
+}
+.moviesactordiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  color: white;
+}

@@ -291,7 +291,7 @@ actorBtn.addEventListener("click", (e) => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.results);
+      //console.log(data.results);
       const rowDiv = document.createElement("div");
       rowDiv.setAttribute("class", "rowcards");
       if (data.results) {
@@ -320,10 +320,9 @@ actorBtn.addEventListener("click", (e) => {
               const singleAcotrPage = await fetchActor(actorBlock.id);
               const ActorMovies1 = await fetchActorsMovies(actorBlock.id);
               CONTAINER.innerHTML = "";
-              //   singleAcotr(singleAcotrPage);
+
               singleAcotr(singleAcotrPage);
-              console.log(ActorMovies.cast);
-              ActorMovies(ActorMovies1);
+              actormovies(ActorMovies1);
             });
             rowDiv.append(actorDiv);
             CONTAINER.appendChild(rowDiv);
@@ -358,7 +357,6 @@ function movieBranchV2() {
   BUTTON_CONTAINER.appendChild(allButtonsDiv);
 }
 const singleAcotr = (acotr) => {
-  console.log(acotr);
   const maindiv = document.createElement("div");
   maindiv.className = "singleActor";
   maindiv.innerHTML = ` <h1>${acotr.name}</h2>
@@ -374,4 +372,27 @@ const singleAcotr = (acotr) => {
   <p> ${acotr.biography}
   </div>`;
   CONTAINER.appendChild(maindiv);
+};
+
+const actormovies = (movies) => {
+  const moviediv = document.createElement("div");
+  movies.cast.map((movie) => {
+    moviediv.setAttribute("class", "moviesactordiv");
+    const Moviescard = document.createElement("div");
+    Moviescard.setAttribute("class", "innerMoviesdiv");
+
+    Moviescard.innerHTML = `
+        <img src="${BACKDROP_BASE_URL + movie.poster_path}" alt="${
+      movie.title
+    }  >
+        <div class = "filmCardBody">
+          <p class = "filmCardtext">${movie.original_title}</p>
+        </div>`;
+    moviediv.appendChild(Moviescard);
+    Moviescard.addEventListener("click", () => {
+      movieDetails(movie);
+    });
+    console.log(movie);
+  });
+  CONTAINER.appendChild(moviediv);
 };
