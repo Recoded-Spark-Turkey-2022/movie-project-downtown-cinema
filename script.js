@@ -420,6 +420,17 @@ function checkingGenreForSingleActor(genreIdCalled) {
   return genre;
 }
 // serch funciotn start here
+
+// fetch function
+const API_KEY = `87b7a72219e91c516dfe252a080dfc25`;
+async function get_movie_by_search(search_term) {
+  const resp = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${search_term}`
+  );
+  const respData = await resp.json();
+  return respData.results;
+}
+
 const forminput = document.getElementById("sreach");
 forminput.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
@@ -442,17 +453,14 @@ function sreachpage(moviess) {
     SearchSingleMovie.innerHTML = ` <img src="${
       BACKDROP_BASE_URL + movie.poster_path
     }" alt="" />
+   
     `;
+
     sreachDivResult.appendChild(SearchSingleMovie);
+
+    SearchSingleMovie.addEventListener("click", () => {
+      movieDetails(movie);
+    });
   });
   CONTAINER.appendChild(sreachDivResult);
-}
-// fetch function
-const API_KEY = `87b7a72219e91c516dfe252a080dfc25`;
-async function get_movie_by_search(search_term) {
-  const resp = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${search_term}`
-  );
-  const respData = await resp.json();
-  return respData.results;
 }
