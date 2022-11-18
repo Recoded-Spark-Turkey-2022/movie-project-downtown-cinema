@@ -124,7 +124,7 @@ const renderMovie = async (movie) => {
   //   })
   //   console.log(productionCompanyshrotened)
   const productionCompany = moviesDetails.production_companies;
-  console.log(productionCompany);
+  // console.log(productionCompany);
   // productionCompany.forEach((company)=>{
   //   if(company.logo_path) productionCompanyshrotened.push(company)
   //   console.log(productionCompanyshrotened)
@@ -146,7 +146,7 @@ const renderMovie = async (movie) => {
     //   break;}
     if (singleMovieActors.length === 5) break;
   }
-  console.log(singleMovieActors);
+  // console.log(singleMovieActors);
   // moviesActors.forEach((castMember)=>{
   //   if(castMember.known_for_department==="Acting") singleMovieActors.push(castMember)
   //   if(singleMovieActors.length===5) break;
@@ -194,9 +194,31 @@ const renderMovie = async (movie) => {
       
       <div class="column2">
         
-        <p>${movie.overview}<br><br>Director: </p>
-        
-        <div class="avatars">
+        <p>${movie.overview}<br><br>Director: </p> `;
+
+  const avatars = document.createElement("div");
+  const column2 = document.querySelector(".column2");
+  avatars.className = "avatars";
+  singleMovieActors.map((singleactor) => {
+    const actorsInMovie = document.createElement("div");
+    actorsInMovie.className = "actorsInMovie";
+    actorsInMovie.innerHTML = `<img   src="${
+      BACKDROP_BASE_URL + singleactor.profile_path
+    }" alt="${singleactor.name}" class="actorsInMovieImg" >`;
+    console.log(singleactor);
+    avatars.appendChild(actorsInMovie);
+    const actorsInMovieImg = document.getElementsByClassName;
+    actorsInMovie.addEventListener("click", async () => {
+      const singleAcotrPage = await fetchActor(singleactor.id);
+      const ActorMovies1 = await fetchActorsMovies(singleactor.id);
+      CONTAINER.innerHTML = "";
+
+      singleAcotr(singleAcotrPage);
+      actormovies(ActorMovies1);
+    });
+  });
+  column2.appendChild(avatars);
+  /*  <div class="avatars">
           
           <img  class= "actorsInMovie" src="${
             BACKDROP_BASE_URL + singleMovieActors[0].profile_path
@@ -222,7 +244,7 @@ const renderMovie = async (movie) => {
         
   </div> <!-- end column2 -->
 </div> <!-- end description -->`;
-
+ */
   // <div class="row">
   //     <div class="col-md-4">
   //          <img id="movie-backdrop" src=${
@@ -317,7 +339,7 @@ async function movieBranch() {
     navGenre.appendChild(list);
 
     list.addEventListener("click", () => {
-      console.log("test");
+      //console.log("test");
       renderMoviesSortable(btn2.value);
     });
 
@@ -353,7 +375,7 @@ const renderMoviesSortable = async (genreID) => {
   const data = await fetch(url);
   moviesChosen = (await data.json()).results;
 
-  console.log({ moviesChosen });
+  // console.log({ moviesChosen });
   const newDiv = document.createElement("div");
   newDiv.className = "moviesDiv";
 
@@ -392,7 +414,7 @@ const renderMoviesSortable = async (genreID) => {
 };
 
 function testing(objects) {
-  console.log(objects);
+  // console.log(objects);
 }
 // start form here
 const actorBtn = document.querySelector(".Actor");
@@ -511,7 +533,6 @@ const actormovies = (movies) => {
     Moviescard.addEventListener("click", () => {
       movieDetails(movie);
     });
-    console.log(movie);
   });
   CONTAINER.appendChild(moviediv);
 };
@@ -519,7 +540,7 @@ const actormovies = (movies) => {
 function checkingGenreForSingleActor(genreIdCalled) {
   let genre = undefined;
   genreIdCalled.forEach((id) => {
-    console.log(id);
+    //   console.log(id);
     for (let i = 0; genreIds.length; i++) {
       if (id === genreIds[i].id) {
         genre = genreIds[i].name;
@@ -556,7 +577,6 @@ function sreachpage(moviess) {
 
   sreachDivResult.setAttribute("class", "sreachDivResult");
   moviess.forEach((movie) => {
-    console.log(movie.id);
     const SearchSingleMovie = document.createElement("div");
     SearchSingleMovie.setAttribute("class", "SearchSingleMovie");
     SearchSingleMovie.innerHTML = ` <img src="${

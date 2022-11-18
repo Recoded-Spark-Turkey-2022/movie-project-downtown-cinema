@@ -341,7 +341,7 @@ a {
   touch-action: manipulation;
 }
 
-.homeBtn{
+.homeBtn {
   border-style: none;
   background-color: #ecda17;
 }
@@ -384,18 +384,18 @@ a {
   margin-top: 5rem;
 }
 /* single Movie start */
-.row{
-color: white;
-margin-top: 5%;
+.row {
+  color: white;
+  margin-top: 5%;
 }
 
 .movie-card {
   font: 14px/22px "Lato", Arial, sans-serif;
-  color: #A9A8A3;
+  color: #a9a8a3;
   padding: 40px 0;
 }
 
-.containersmall{
+.containersmall {
   margin: 0 auto;
   width: 80%;
   height: 640px;
@@ -406,41 +406,41 @@ margin-top: 5%;
 }
 
 .hero {
-  height: 342px;  
-  margin:0;
+  height: 342px;
+  margin: 0;
   position: relative;
   /* overflow: hidden; */
-  z-index:1;
+  z-index: 1;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-    
 }
-.singleMovieImg{
-  content:'';
-  width:100%; height:100%;
-  position:absolute;
+.singleMovieImg {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
   overflow: hidden;
   margin-top: 1rem;
-  top:0; left:0;
+  top: 0;
+  left: 0;
   /* background:red; */
-  z-index:-1;
- 
+  z-index: -1;
+
   transform: skewY(-2.2deg);
-  transform-origin:0 0;
-  
-  
+  transform-origin: 0 0;
+
   background: #ff0000;
   border: 5px solid #c40000;
   border-radius: 3px;
   box-shadow: 0 0 10px #ff0000;
-} 
-.singleMoviePoster{
+}
+.singleMoviePoster {
   background: #1310d6;
   border: 5px solid #0300c8;
   border-radius: 3px;
   box-shadow: 0 0 10px #1310d6;
 }
-.details{
+.details {
   margin-top: 1rem;
 }
 .cover {
@@ -456,69 +456,67 @@ margin-top: 5%;
   box-shadow: 0 0 10px #1310d6;
 }
 .title1 span {
-    position: absolute;
-    top: 3px;
-    margin-left: 12px;
-    background: #C4AF3D;
-    border-radius: 5px;
-    color: #544C21;
-    font-size: 14px;
-    padding: 0px 4px;
-  }
-  .details .title1{
-    color: white;
-    font-size: 2rem;
-    margin-bottom: 13px;
-    position: relative;
-    margin-top: 3rem;
-  }
-  
-  .details .title2 {    
-    color: #C7C1BA;
-    font-size: 23px;    
-    font-weight: 300;
-    margin-bottom: 15px;
-  }
+  position: absolute;
+  top: 3px;
+  margin-left: 12px;
+  background: #c4af3d;
+  border-radius: 5px;
+  color: #544c21;
+  font-size: 14px;
+  padding: 0px 4px;
+}
+.details .title1 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 13px;
+  position: relative;
+  margin-top: 3rem;
+}
 
-  .singleRating{
-    background: #C4AF3D;
-    color: #fefefe;
-    top: 3px;
-    margin-left: 12px;
-    border-radius: 5px;
-    font-size: 14px;
-    padding: 1px 4px;
-  }
-  .details .likes {
-    margin-left: 24px;
-    background: #ce1515;
-    color: #ffffff;
-    border-radius: 5px;
-    padding: 1px 4px;
-    font-size: 14px;
-  }
-  .languages{
-    margin-left: 24px;
-    background: #0b31cc;
-    color: #ffffff;
-    border-radius: 5px;
-    padding: 1px 4px;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
+.details .title2 {
+  color: #c7c1ba;
+  font-size: 23px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.singleRating {
+  background: #c4af3d;
+  color: #fefefe;
+  top: 3px;
+  margin-left: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 1px 4px;
+}
+.details .likes {
+  margin-left: 24px;
+  background: #ce1515;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 1px 4px;
+  font-size: 14px;
+}
+.languages {
+  margin-left: 24px;
+  background: #0b31cc;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 1px 4px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
 
 .details {
   padding: 190px 0 0 280px;
 }
 
 .description {
-  
   bottom: 0px;
   height: 200px;
   font-size: 16px;
   line-height: 26px;
-  color: #B1B0AC;
-  
+  color: #b1b0ac;
 }
 
 .column1 {
@@ -529,15 +527,13 @@ margin-top: 5%;
   text-align: center;
 }
 
-
-.logos{
+.logos {
   max-width: 10rem;
   max-height: 5rem;
   margin-left: 1rem;
   background-color: white;
   padding: 0.3rem 0.3rem;
   border-radius: 5px;
-
 }
 
 .tag:hover {
@@ -552,24 +548,23 @@ margin-top: 5%;
   float: left;
 }
 
-.actorsInMovie{
+/* .actorsInMovie img {
   max-width: 3.5rem;
   border-radius: 50%;
   border: white solid;
   margin-right: 1rem;
   cursor: pointer;
+  display: block;
 }
-
-
-
-
-
-
-
-
+ */
+.actorsInMovie {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.actorsInMovie img {
+  width: 200px;
+}
 /* single Movie End*/
-
-
 
 /* just test disgne */
 .singleActor {
@@ -591,4 +586,7 @@ moives of actor
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
   color: white;
+}
+.avatars {
+  margin-top: 400px;
 }
