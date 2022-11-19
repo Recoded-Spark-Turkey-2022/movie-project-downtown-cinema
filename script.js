@@ -511,20 +511,45 @@ function movieBranchV2() {
 }
 const singleAcotr = (acotr) => {
   const maindiv = document.createElement("div");
-  maindiv.className = "singleActor";
-  maindiv.innerHTML = ` <h1>${acotr.name}</h2>
+  maindiv.className = "card";
 
-  <img src="${BACKDROP_BASE_URL + acotr.profile_path}" alt="" />
-  <div class="actorinfo">
-    <div > Gender : ${acotr.gender === 1 ? "Female" : "Male"} </div>
-    <div > popularity : ${acotr.popularity} </div>
-    <div > birthday : ${acotr.birthday} </div>
-  </div>
-  <div class= biography>
-  <h2>Biography</h2>
-  <p> ${acotr.biography}
-  </div>`;
-  CONTAINER.appendChild(maindiv);
+  const biography = document.createElement("div")
+  biography.className =`Biography`
+  biography.innerHTML = `<h1>${acotr.name}</h2>
+  <p>Date of Birth:  ${acotr.birthday}</p>
+  <p>${acotr.biography}</p>`
+
+  const anotherdiv = document.createElement("div")
+  anotherdiv.className =`upContainer`
+  // maindiv.innerHTML = ` <h1>${acotr.name}</h2>
+
+  // <img src="${BACKDROP_BASE_URL + acotr.profile_path}" alt="" />
+  // <div class="actorinfo">
+  //   <div > Gender : ${acotr.gender === 1 ? "Female" : "Male"} </div>
+  //   <div > popularity : ${acotr.popularity} </div>
+  //   <div > birthday : ${acotr.birthday} </div>
+  // </div>
+  // <div class= biography>
+  // <h2>Biography</h2>
+  // <p> ${acotr.biography}
+  // </div>`;
+
+  maindiv.innerHTML = `   <a href="#">
+      <img class="img1" src="${
+        BACKDROP_BASE_URL + acotr.profile_path
+      }" alt="${acotr.name} poster">
+      <div class="title">${acotr.name}</div>
+      <div class="text">${acotr.birthday}</div>
+      <a href="#"><div class="catagory">${acotr.gender === 1 ? "Female" : "Male"} <i class="fas fa-film"></i></div></a>
+      <a href="#"><div class="views">${
+        acotr.popularity
+      } <i class="fa fa-star" aria-hidden="true"></i> </div></a>
+    </a>`;
+
+
+    anotherdiv.appendChild(maindiv);
+    anotherdiv.appendChild(biography);
+    CONTAINER.appendChild(anotherdiv)
 };
 
 const actormovies = (movies) => {
