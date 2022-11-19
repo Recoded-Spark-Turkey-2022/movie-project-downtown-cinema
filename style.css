@@ -94,8 +94,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: azure;
+  background-color: black ;
   margin-top: 15%;
+  border-radius: 5px;
+  color: white;
 }
 .footer li {
   display: inline;
@@ -647,4 +649,23 @@ moives of actor
   /* position: absolute; */
   transform: translate(235px);
   margin-top: 5%;
+}
+
+.Biography{
+  color: white;
+  max-width: 70%;
+  text-align: justify;
+}
+
+.upContainer{
+  margin-top: 5%;
+  display: flex;
+  gap: 35px
+  /* display: grid;
+  grid-template-rows: 1fr 1fr; */
+}
+
+.tags{
+  color: white;
+  font-size: 24px
 }
