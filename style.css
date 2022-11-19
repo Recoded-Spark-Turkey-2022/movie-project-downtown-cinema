@@ -94,7 +94,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: azure;
+  background-color: #ecda17;
 }
 .footer li {
   display: inline;
@@ -121,7 +121,7 @@
 }
 .navbar {
   width: 100%;
-  background-color: #ecda17;
+  background-color:#ecda17;
   height: 50px;
   position: fixed;
   z-index: 1;
@@ -168,7 +168,16 @@
 #sreach {
   position: absolute;
   right: 5%;
+  border-radius: 50px;
+  background-color: rgb(246, 236, 236);
 }
+#sreach:hover{
+  opacity: 0.8;
+  background-color: #ec5938;
+  /* transform: scale(1.05); */
+  transition: all 1s ease;
+}
+
 
 /* Navbar and Mid section End */
 /* Movie Card Start */
@@ -362,10 +371,27 @@ a {
 }
 .innercard img {
   width: 100%;
+  border-radius: 15px;
 }
 .cards {
-  background-color: #10cfcf;
+  background-color: #282A3A;
+  border-radius: 15px;
+  margin-top: 50px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgb(206, 105, 82);
+
+
 }
+.cards:hover  {
+  opacity: 0.8;
+  background-color: #b42f2b;
+  transform: scale(1.05);
+  transition: all 1s ease;
+
+}
+
+
+
 @media (max-width: 1200px) {
   .rowcards {
     display: grid;
@@ -406,14 +432,14 @@ margin-top: 5%;
 }
 
 .hero {
-  height: 342px;  
+  height: 342px;
   margin:0;
   position: relative;
   /* overflow: hidden; */
   z-index:1;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-    
+
 }
 .singleMovieImg{
   content:'';
@@ -424,16 +450,16 @@ margin-top: 5%;
   top:0; left:0;
   /* background:red; */
   z-index:-1;
- 
+
   transform: skewY(-2.2deg);
   transform-origin:0 0;
-  
-  
+
+
   background: #ff0000;
   border: 5px solid #c40000;
   border-radius: 3px;
   box-shadow: 0 0 10px #ff0000;
-} 
+}
 .singleMoviePoster{
   background: #1310d6;
   border: 5px solid #0300c8;
@@ -472,10 +498,10 @@ margin-top: 5%;
     position: relative;
     margin-top: 3rem;
   }
-  
-  .details .title2 {    
+
+  .details .title2 {
     color: #C7C1BA;
-    font-size: 23px;    
+    font-size: 23px;
     font-weight: 300;
     margin-bottom: 15px;
   }
@@ -512,13 +538,13 @@ margin-top: 5%;
 }
 
 .description {
-  
+
   bottom: 0px;
   height: 200px;
   font-size: 16px;
   line-height: 26px;
   color: #B1B0AC;
-  
+
 }
 
 .column1 {
@@ -573,14 +599,18 @@ margin-top: 5%;
 
 /* just test disgne */
 .singleActor {
-  background-color: wheat;
-  margin: 20px;
-}
-.singleActor img {
-  width: 200px;
+
+  background-color: rgb(187, 192, 150);
+  margin: 50px;
 }
 
-/* 
+.singleActor img {
+  width: 200px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+/*
 moives of actor
 */
 .innerMoviesdiv img {
