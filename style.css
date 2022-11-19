@@ -95,6 +95,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: azure;
+  margin-top: 15%;
 }
 .footer li {
   display: inline;
@@ -552,21 +553,39 @@ margin-top: 5%;
   float: left;
 }
 
-.actorsInMovie{
+/* .actorsInMovie{
   max-width: 3.5rem;
   border-radius: 50%;
   border: white solid;
   margin-right: 1rem;
   cursor: pointer;
+} */
+
+
+.avatars{
+/* margin-top: 60%; */
+display: flex;
+z-index: 100000;
+}
+.actorsInMovieImg{
+  max-width: 50%;
+  border-radius: 10px;
+}
+.anything{
+  transform: translate( 0px, -100px);
+}
+.trailer{
+  
+}
+
+.trailerinside{
+ transform: translate(200px);
 }
 
 
-
-
-
-
-
-
+.cardContainer7{
+  margin-top: 10%;
+}
 /* single Movie End*/
 
 
@@ -598,3 +617,4 @@ moives of actor
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
