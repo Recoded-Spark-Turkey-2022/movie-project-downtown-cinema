@@ -65,6 +65,7 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 
+// FOR HOME PAGE SLIDER
 const renderMovies = (movies) => {
   const carouselContinar = document.querySelector(".carouselContinar");
   const upperSection = document.querySelector(".upperSection");
@@ -121,6 +122,7 @@ const renderMovies = (movies) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
+//FOR SINGLE MOVIE
 const renderMovie = async (movie) => {
   const movieId = movie.id;
   //Movie Details
@@ -287,17 +289,8 @@ const renderMovie = async (movie) => {
 
 };
 
-// const autorun2 = async () => {
-//   let url = undefined;
-//   const urlArr = ["movie/top_rated", "movie/popular", "movie/upcoming"];
-//   for (let i = 0; i < 3; i++) {
-//     url = constructUrl(urlArr[i]);
-//     fetch(url)
-//       .then((res) => res.json())
-//       .then((api) => testing(api.results));
-//   }
-// };
 
+// MORE AUTORUN
 let genreIds = [];
 const autorun3 = async () => {
   const url = `${constructUrl("genre/movie/list")}&language=en-US`;
@@ -338,7 +331,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   movieBranchV2();
   renderMoviesSortable(14);
 });
-
+//MAIN MOVIE BRANCH
 async function movieBranch() {
   // const allButtonsDiv = document.createElement("div");
   // allButtonsDiv.className = "allButtons";
@@ -521,18 +514,7 @@ const singleAcotr = (acotr) => {
 
   const anotherdiv = document.createElement("div")
   anotherdiv.className =`upContainer`
-  // maindiv.innerHTML = ` <h1>${acotr.name}</h2>
 
-  // <img src="${BACKDROP_BASE_URL + acotr.profile_path}" alt="" />
-  // <div class="actorinfo">
-  //   <div > Gender : ${acotr.gender === 1 ? "Female" : "Male"} </div>
-  //   <div > popularity : ${acotr.popularity} </div>
-  //   <div > birthday : ${acotr.birthday} </div>
-  // </div>
-  // <div class= biography>
-  // <h2>Biography</h2>
-  // <p> ${acotr.biography}
-  // </div>`;
 
   maindiv.innerHTML = `   <a href="#">
       <img class="img1" src="${
@@ -652,6 +634,3 @@ function sreachpage(moviess) {
 }
 
 // srech function end from here
-
-
-
