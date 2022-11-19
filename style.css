@@ -569,14 +569,17 @@ z-index: 100000;
 }
 .actorsInMovieImg{
   max-width: 50%;
+  border-radius: 10px;
 }
-
+.anything{
+  transform: translate( 0px, -100px);
+}
 .trailer{
   
 }
 
 .trailerinside{
- transform: translate(200px, 60px);
+ transform: translate(200px);
 }
 
 

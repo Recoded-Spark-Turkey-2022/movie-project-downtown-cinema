@@ -197,12 +197,13 @@ const renderMovie = async (movie) => {
       
       <div class="column2">
         
-        <p>${movie.overview}<br><br>Director: </p> 
+        <p>${movie.overview} </p> 
       </div>`;
 
   //Actors
   const avatars = document.createElement("div");
-  const avatarContainer = document.createElement("div");
+  const avatarContainer = document.createElement("div")
+  avatarContainer.className=`anything`;
   // const column2 = document.querySelector(".column2");
   avatars.className = "avatars";
   singleMovieActors.map((singleactor) => {
